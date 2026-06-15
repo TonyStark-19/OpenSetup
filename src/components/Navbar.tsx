@@ -67,7 +67,7 @@ export default function Navbar() {
                         hover:border-[#38383c] transition-colors cursor-pointer"
                         aria-label="Toggle theme"
                     >
-                        {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
+                        {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
                     </button>
 
                     {/* separator line */}

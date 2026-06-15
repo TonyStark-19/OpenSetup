@@ -1,5 +1,6 @@
-// import navbar
+// import navbar and footer
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 // import sections
 import Hero from "../sections/home/Hero";
@@ -10,6 +11,7 @@ export default function HomePage() {
         <>
             <Navbar />
             <Hero />
+            <Footer />
         </>
     )
 }

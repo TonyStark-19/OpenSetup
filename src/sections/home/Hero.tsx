@@ -1,5 +1,8 @@
 // import icons
-import { ArrowRight, GitPullRequestArrow } from "lucide-react"
+import { ArrowRight, GitPullRequestArrow } from "lucide-react";
+
+// import components
+import GuidePanel from "./GuidePanel";
 
 // her section
 export default function Hero() {
@@ -56,7 +59,7 @@ export default function Hero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-20 flex flex-col justify-center items-center w-full max-w-3xl mx-auto text-center pt-16">
+            <div className="relative z-20 flex flex-col justify-center items-center w-full max-w-3xl mx-auto text-center pt-24">
                 {/* New guides update tab */}
                 <div
                     className="bg-[#121214]/90 flex flex-row justify-center items-center rounded-full py-1.5 pl-3 pr-4 border border-[#262629] group 
@@ -83,7 +86,7 @@ export default function Hero() {
                     Every dev setup, <br /> one place.
                 </h1>
 
-                <p className="text-[#9CA3AF] text-base md:text-lg max-w-150 mt-6">
+                <p className="text-[#888a8e] text-base md:text-lg max-w-150 mt-6">
                     Community-curated setup guides for every stack.
                     Find yours, copy the steps, and start building instantly.
                 </p>
@@ -99,7 +102,8 @@ export default function Hero() {
 
                     <button
                         className="w-full sm:w-auto bg-[#121214] hover:bg-[#1a1a1e] border border-[#262629] hover:border-[#38383c] rounded-full 
-                        text-[#EDEEF0] text-sm font-semibold py-3 px-6 cursor-pointer flex flex-row justify-center items-center gap-2 transition-all active:scale-[0.98]"
+                        text-[#EDEEF0] text-sm font-semibold py-3 px-6 cursor-pointer flex flex-row justify-center items-center gap-2 
+                        transition-all active:scale-[0.98]"
                     >
                         <GitPullRequestArrow size={15} className="text-[#888a8e]" />
                         Contribute a guide
@@ -112,6 +116,8 @@ export default function Hero() {
                     · COMMUNITY MAINTAINED
                 </p>
             </div>
+
+            <GuidePanel />
         </div>
     )
 }
