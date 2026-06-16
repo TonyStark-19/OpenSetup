@@ -1,7 +1,7 @@
 // import icons
 import { ArrowRight, GitPullRequestArrow } from "lucide-react";
 
-// import components
+// import sections
 import GuidePanel from "./GuidePanel";
 
 // her section
@@ -12,10 +12,8 @@ export default function Hero() {
             <div
                 className="absolute inset-0 z-0 pointer-events-none opacity-[0.22]"
                 style={{
-                    backgroundImage: "radial-gradient(rgba(255,255,255,0.3) 1px, transparent 1px)",
-                    backgroundSize: "20px 20px",
-                    WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 50%, transparent 90%)",
-                    maskImage: "radial-gradient(circle at 50% 50%, black 50%, transparent 90%)"
+                    backgroundImage: "radial-gradient(rgba(255,255,255,0.25) 1px, transparent 1px)",
+                    backgroundSize: "20px 20px"
                 }}
             />
 
@@ -117,6 +115,7 @@ export default function Hero() {
                 </p>
             </div>
 
+            {/* setup guide panel */}
             <GuidePanel />
         </div>
     )

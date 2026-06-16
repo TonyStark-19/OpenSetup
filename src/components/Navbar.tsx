@@ -73,18 +73,15 @@ export default function Navbar() {
                     {/* separator line */}
                     <span className="h-4 w-px bg-[#262629]" />
 
-                    {/* Login */}
-                    <button className="text-[#888a8e] hover:text-[#EDEEF0] transition text-[14px] font-medium cursor-pointer">
-                        Login
-                    </button>
-
-                    {/* Signup */}
-                    <button
-                        className="text-[14px] font-semibold cursor-pointer py-1.5 px-4 bg-[#EDEEF0] hover:bg-white text-black rounded-full 
-                        transition active:scale-[0.98]"
-                    >
-                        Sign up
-                    </button>
+                    {/* get started */}
+                    <Link to="/get-started">
+                        <button
+                            className="text-[14px] font-semibold cursor-pointer py-1.5 px-4 bg-[#EDEEF0] hover:bg-white text-black rounded-full 
+                            transition active:scale-[0.98]"
+                        >
+                            Get Started
+                        </button>
+                    </Link>
                 </div>
             </div>
         </nav>
