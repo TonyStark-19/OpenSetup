@@ -52,7 +52,7 @@ export default function Footer() {
                         to="/"
                         className="flex items-center gap-2.5"
                     >
-                        <div className="flex flex-row items-center gap-2.5 text-[14px] font-semibold text-[#EDEEF0] hover:opacity-90 transition tracking-tight">
+                        <div className="flex flex-row items-center gap-2.5 text-[16px] font-semibold text-[#EDEEF0] hover:opacity-90 transition tracking-tight">
                             <Terminal size={15} className="text-[#888a8e]" />
                             OpenSetup
                         </div>
@@ -74,7 +74,7 @@ export default function Footer() {
                                 className="p-2 rounded-lg border border-[#262629] bg-[#121214] text-[#888a8e] hover:text-[#EDEEF0] 
                                 hover:border-[#38383c] transition-all duration-200 hover:scale-[1.02]"
                             >
-                                <Icon size={16} />
+                                <Icon size={17} />
                             </a>
                         ))}
                     </div>

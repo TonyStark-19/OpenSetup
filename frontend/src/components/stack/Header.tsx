@@ -2,7 +2,7 @@
 export default function Header() {
     return (
         <div className="text-center max-w-2xl px-4 select-none z-10">
-            <h3 className="text-[#525256] text-[11px] uppercase font-bold font-mono tracking-widest">
+            <h3 className="text-[#525256] text-[12px] uppercase font-bold font-mono tracking-widest">
                 Supported Technologies
             </h3>
 
