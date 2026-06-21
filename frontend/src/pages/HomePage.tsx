@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Hero from "../sections/home/Hero";
 import TechStacks from "../sections/stack/TechStacks";
 import AboutUs from "../sections/about/AboutUs";
+import HowItWorks from "../sections/how-it-works/HowItWorks";
 
 // home page component
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
             <Hero />
             <AboutUs />
             <TechStacks />
+            <HowItWorks />
             <Footer />
         </>
     )
