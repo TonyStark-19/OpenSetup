@@ -9,7 +9,7 @@ export default function Info() {
             <div
                 className="col-span-2 flex flex-col justify-between bg-zinc-50/50 dark:bg-black/40 backdrop-blur-md border 
                 border-zinc-200 dark:border-zinc-900 p-6 min-h-44 relative overflow-hidden group hover:border-zinc-300 
-                dark:hover:border-zinc-800 transition-all duration-300 shadow-sm dark:shadow-2xl dark:shadow-black rounded-xl"
+                dark:hover:border-zinc-800 transition-all duration-300 shadow-sm dark:shadow-2xl dark:shadow-black"
             >
                 {/* Interactive dynamic glow behind card on hover */}
                 <div
@@ -52,7 +52,7 @@ export default function Info() {
             <div
                 className="flex flex-col justify-between bg-zinc-50/50 dark:bg-[#0b0b0d]/60 backdrop-blur-md border 
                 border-zinc-200 dark:border-zinc-900 p-5 hover:border-zinc-300 dark:hover:border-zinc-800 transition-all 
-                duration-300 group rounded-xl shadow-sm dark:shadow-none"
+                duration-300 group shadow-sm dark:shadow-none"
             >
                 <span
                     className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 dark:text-zinc-500 
@@ -71,7 +71,7 @@ export default function Info() {
             <div
                 className="flex flex-col justify-between bg-zinc-50/50 dark:bg-[#0b0b0d]/60 backdrop-blur-md border 
                 border-zinc-200 dark:border-zinc-900 p-5 hover:border-zinc-300 dark:hover:border-zinc-800 transition-all 
-                duration-300 group rounded-xl shadow-sm dark:shadow-none"
+                duration-300 group shadow-sm dark:shadow-none"
             >
                 <span
                     className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 dark:text-zinc-500 

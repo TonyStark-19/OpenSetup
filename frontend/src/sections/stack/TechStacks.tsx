@@ -36,7 +36,7 @@ import Stats from "../../components/stack/Stats";
 // tech stacks section
 export default function TechStacks() {
     return (
-        <section className="relative flex flex-col justify-center items-center py-24 bg-[#0a0a0a] overflow-hidden">
+        <section className="relative flex flex-col justify-center items-center py-24 bg-white dark:bg-[#0a0a0a] overflow-hidden transition-colors duration-300">
             {/* Header Content */}
             <Header />
 

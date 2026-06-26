@@ -11,17 +11,6 @@ import { verify } from 'opensetup/core';
 const result = verify('nextjs-tailwind-auth');
 console.log(result.status); // SUCCESS_`;
 
-// custom styles
-const customCodeBlockStyle = {
-    backgroundColor: '#000000',
-    padding: '1.5rem',
-    borderRadius: '2px',
-    border: '1px solid #262626',
-    fontSize: '12px',
-    marginTop: '0px',
-    marginBottom: '0px',
-};
-
 // import components
 import AboutHeader from "../../components/about/AboutHeader";
 import LeftCard from "../../components/about/LeftCard";
@@ -34,32 +23,36 @@ export default function AboutUs() {
     // handlecopy
     const handleCopy = async () => {
         await navigator.clipboard.writeText(codeString);
-
         setCopied(true);
-
-        setTimeout(() => {
-            setCopied(false);
-        }, 2000);
+        setTimeout(() => setCopied(false), 2000);
     };
 
     return (
-        <div className="relative flex flex-col justify-center items-center py-24 bg-[#0a0a0a] overflow-hidden px-30 w-full">
-            {/* header */}
-            <AboutHeader />
+        <div
+            className="relative flex flex-col justify-center items-center py-24 bg-white dark:bg-[#0a0a0a] overflow-hidden 
+            px-6 md:px-16 lg:px-24 w-full transition-colors duration-300"
+        >
+            {/* Sync structured container width layout */}
+            <div className="w-full max-w-7xl flex flex-col gap-12">
+                <AboutHeader />
 
-            <div className="grid grid-cols-[420px_1fr] gap-10 mt-14 w-full">
-                {/* left card */}
-                <LeftCard />
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-4 w-full items-stretch">
+                    {/* Left structural element wrapper */}
+                    <div className="lg:col-span-4 flex">
+                        <LeftCard />
+                    </div>
 
-                {/* right card grid */}
-                <RightCard
-                    codeString={codeString}
-                    copied={copied}
-                    customCodeBlockStyle={customCodeBlockStyle}
-                    handleCopy={handleCopy}
-                    stacks={stacks}
-                />
+                    {/* Right structural element wrapper */}
+                    <div className="lg:col-span-8 flex">
+                        <RightCard
+                            codeString={codeString}
+                            copied={copied}
+                            handleCopy={handleCopy}
+                            stacks={stacks}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
-    )
+    );
 }

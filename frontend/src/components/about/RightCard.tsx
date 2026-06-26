@@ -9,12 +9,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import dark theme
 import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-// import type
-import type { CSSProperties } from "react";
-
 // right card props
 interface RightCard {
-    customCodeBlockStyle: CSSProperties;
     codeString: string;
     handleCopy: () => void;
     copied: boolean;
@@ -22,33 +18,44 @@ interface RightCard {
 }
 
 // right card component
-export default function RightCard({ customCodeBlockStyle, codeString, handleCopy, copied, stacks }: RightCard) {
+export default function RightCard({ codeString, handleCopy, copied, stacks }: RightCard) {
     return (
-        <div className="flex flex-col w-full gap-5 h-full">
-            <div className="flex flex-col bg-[#0e0e10] flex-1">
-                <div className="flex flex-row justify-between items-center bg-[#201f22] p-4 w-full">
-                    <span className="text-neutral-400 font-mono text-[10px] tracking-wider font-bold">
+        <div className="flex flex-col w-full gap-6 justify-between">
+            {/* Top Code Execution Card */}
+            <div
+                className="flex flex-col bg-zinc-50 dark:bg-[#0e0e10] border border-zinc-200 dark:border-[#212124] 
+                overflow-hidden transition-all duration-300 grow"
+            >
+                <div className="bg-zinc-100 dark:bg-[#201f22] border-b border-zinc-200 dark:border-zinc-800 px-5 py-3 w-full transition-colors">
+                    <span className="text-zinc-500 dark:text-neutral-400 font-mono text-[10px] tracking-wider font-bold">
                         SOLUTION_V1_VERIFICATION.SH
                     </span>
                 </div>
 
-                <div className="flex flex-row justify-between items-center p-6 border-l border-r border-b border-[#212124] w-full">
-                    <div className="flex flex-col max-w-85">
+                <div className="flex flex-col md:flex-row justify-between items-stretch gap-6 p-6 w-full">
+                    <div className="flex flex-col justify-center max-w-sm flex-1">
                         <div className="flex flex-row justify-start items-center gap-3 mb-3">
-                            <h3 className="text-lg md:text-2xl text-neutral-100 font-medium">Community Curated</h3>
-                            <div className="w-2 h-2 bg-[#4ade80] rounded-full animate-pulse" />
+                            <h3 className="text-xl md:text-2xl text-zinc-900 dark:text-neutral-100 font-semibold transition-colors">Community Curated</h3>
+                            <div className="w-2 h-2 bg-[#4ade80] rounded-full shadow-[0_0_8px_#4ade80]" />
                         </div>
 
-                        <p className="text-[#888a8e] text-[13px] leading-relaxed">Every setup guide in our library is vetted by thousands of senior
-                            developers. No more guessing if a tutorial still works in 2026.
+                        <p className="text-zinc-500 dark:text-[#888a8e] text-[13px] leading-relaxed transition-colors">
+                            Every setup guide in our library is vetted by thousands of senior developers. No more guessing if a tutorial still works in 2026.
                         </p>
                     </div>
 
-                    <div className="w-[50%] group rounded-sm relative overflow-hidden py-2">
+                    {/* Integrated Syntax Box */}
+                    <div className="w-full md:w-[48%] group rounded-lg relative overflow-hidden border border-zinc-200 dark:border-zinc-900/60 shadow-sm">
                         <SyntaxHighlighter
                             language="javascript"
                             style={coldarkDark}
-                            customStyle={customCodeBlockStyle}
+                            customStyle={{
+                                backgroundColor: '#070708',
+                                padding: '1.25rem',
+                                fontSize: '12px',
+                                margin: 0,
+                                minHeight: '120px'
+                            }}
                             wrapLongLines={true}
                         >
                             {codeString}
@@ -56,59 +63,71 @@ export default function RightCard({ customCodeBlockStyle, codeString, handleCopy
 
                         <button
                             onClick={handleCopy}
-                            className="absolute top-5 right-3 text-neutral-600 hover:text-neutral-300 transition-colors cursor-pointer"
+                            className="absolute top-4 right-4 p-1.5 rounded-md bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 
+                            text-zinc-400 hover:text-white transition-all cursor-pointer shadow-md"
                             aria-label="Copy code"
                         >
-                            {copied ? (
-                                <IoCheckmark size={16} />
-                            ) : (
-                                <IoCopyOutline size={16} />
-                            )}
+                            {copied ? <IoCheckmark size={14} className="text-emerald-400" /> : <IoCopyOutline size={14} />}
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 w-full gap-5">
-                <div className="flex flex-col justify-between p-5 bg-[#0e0e10] border border-[#212124] min-h-50">
+            {/* Bottom Twin Split Grid Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-6">
+                {/* Modern Stacks Box */}
+                <div
+                    className="flex flex-col justify-between p-6 bg-zinc-50 dark:bg-[#0e0e10] border 
+                    border-zinc-200 dark:border-[#212124] min-h-48 transition-all duration-300"
+                >
                     <div className="flex flex-col">
-                        <div className="flex flex-row justify-start items-center gap-2">
-                            <MdOutlineLayers size={20} className="text-[#EDEEF0]" />
-                            <h3 className="text-[#EDEEF0] text-xl font-medium">Modern Stacks</h3>
+                        <div className="flex flex-row justify-start items-center gap-2.5">
+                            <MdOutlineLayers size={18} className="text-zinc-700 dark:text-[#EDEEF0]" />
+                            <h3 className="text-zinc-900 dark:text-[#EDEEF0] text-lg font-semibold transition-colors">Modern Stacks</h3>
                         </div>
 
-                        <p className="text-[#888a8e] text-[13px] leading-relaxed mt-3">First-class support for the tech you actually use like Vite,
-                            Tailwind, Next.js, and much more.
+                        <p className="text-zinc-500 dark:text-[#888a8e] text-[13px] leading-relaxed mt-2.5 transition-colors">
+                            First-class support for the tech you actually use like Vite, Tailwind, Next.js, and much more.
                         </p>
                     </div>
 
-                    <div className="flex flex-row gap-3 mt-3">
+                    <div className="flex flex-wrap gap-2 mt-4">
                         {stacks.map((stack, idx) => (
                             <div
                                 key={idx}
-                                className="border-2 border-[#252628] bg-[#1d1d1f] px-2"
+                                className="border border-zinc-200 dark:border-[#252628] bg-white dark:bg-[#1d1d1f] 
+                                px-2.5 py-0.5 rounded-md shadow-sm transition-colors"
                             >
-                                <h4 className="uppercase text-[#EDEEF0] text-[11px] mt-0.5">{stack}</h4>
+                                <h4 className="uppercase text-zinc-600 dark:text-[#EDEEF0] font-mono text-[10px] font-bold tracking-wide mt-0.5">{stack}</h4>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="flex flex-col justify-between p-5 bg-[#0e0e10] border border-[#212124] group">
+                {/* Copy Paste Ready Box */}
+                <div
+                    className="flex flex-col justify-between p-6 bg-zinc-50 dark:bg-[#0e0e10] border border-zinc-200 
+                    dark:border-[#212124] min-h-48 transition-all duration-300 group"
+                >
                     <div className="flex flex-col">
                         <div className="flex flex-row justify-between items-center gap-2">
-                            <h3 className="text-[#EDEEF0] text-xl font-medium">Copy-Paste Ready</h3>
-                            <IoMdArrowForward size={20} className="text-[#1d2329] group-hover:text-[#EDEEF0] transition" />
+                            <h3 className="text-zinc-900 dark:text-[#EDEEF0] text-lg font-semibold transition-colors">Copy-Paste Ready</h3>
+                            <IoMdArrowForward size={18} className="text-zinc-300 dark:text-[#1d2329] group-hover:text-zinc-900 
+                            dark:group-hover:text-[#EDEEF0] group-hover:translate-x-0.5 transition-all duration-200" />
                         </div>
-
-                        <p className="text-[#888a8e] text-[13px] leading-relaxed mt-3 max-w-70">Production-ready snippets that just work. No more
-                            boilerplate hell.
+                        <p className="text-zinc-500 dark:text-[#888a8e] text-[13px] leading-relaxed mt-2.5 transition-colors">
+                            Production-ready snippets that just work. No more boilerplate hell.
                         </p>
                     </div>
 
-                    <p className="text-xs text-[#3e3d3f]">npx opensetup init --full-stack</p>
+                    <p
+                        className="text-[11px] font-mono font-medium text-zinc-400 dark:text-[#3e3d3f] bg-zinc-100 
+                        dark:bg-zinc-950 px-2.5 py-1.5 rounded-md border border-zinc-200 dark:border-zinc-900/40 w-max transition-colors"
+                    >
+                        npx opensetup init --full-stack
+                    </p>
                 </div>
             </div>
         </div>
-    )
+    );
 }
