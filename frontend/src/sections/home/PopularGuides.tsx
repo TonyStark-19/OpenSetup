@@ -61,14 +61,14 @@ const GUIDES_DATA = [
 ];
 
 // import components
-import PopularGuidesHeader from "../components/popular-guides/PopularGuidesHeader";
-import PopularGuidesGrid from "../components/popular-guides/PopularGuidesGrid";
+import PopularGuidesHeader from "../../components/home/popular-guides/PopularGuidesHeader";
+import PopularGuidesGrid from "../../components/home/popular-guides/PopularGuidesGrid";
 
 // popular guides component
 export default function PopularGuides() {
     return (
         <div
-            className="relative flex flex-col justify-center items-center py-24 bg-white dark:bg-[#0a0a0a] 
+            className="relative flex flex-col justify-center items-center py-24 bg-white dark:bg-[#0a0a0a] border-t border-zinc-200 dark:border-zinc-900
             overflow-hidden px-6 md:px-16 lg:px-24 w-full transition-colors duration-300"
         >
             <div className="w-full max-w-7xl flex flex-col gap-12">

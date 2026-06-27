@@ -12,9 +12,9 @@ const result = verify('nextjs-tailwind-auth');
 console.log(result.status); // SUCCESS_`;
 
 // import components
-import AboutHeader from "../../components/about/AboutHeader";
-import LeftCard from "../../components/about/LeftCard";
-import RightCard from "../../components/about/RightCard";
+import AboutHeader from "../../components/home/about/AboutHeader";
+import LeftCard from "../../components/home/about/LeftCard";
+import RightCard from "../../components/home/about/RightCard";
 
 // about us component
 export default function AboutUs() {

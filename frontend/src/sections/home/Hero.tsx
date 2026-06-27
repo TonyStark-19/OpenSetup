@@ -9,7 +9,13 @@ export default function Hero() {
     return (
         <div
             className="relative bg-white dark:bg-[#0a0a0a] flex flex-col justify-center items-center min-h-screen 
-            overflow-hidden px-4 transition-colors duration-300"
+            overflow-hidden px-4 transition-colors duration-300 pb-10"
+            style={{
+                backgroundImage: `
+                radial-gradient(circle at 50% 100%, rgba(70, 85, 110, 0.5) 0%, transparent 80%),
+                radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.4) 0%, transparent 70%),
+                radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 80%)`,
+            }}
         >
             {/* Dot Grid Layer - Toggles visibility opacity dynamically */}
             <div
@@ -19,6 +25,7 @@ export default function Hero() {
                     backgroundSize: "20px 20px"
                 }}
             />
+
             <div
                 className="absolute inset-0 z-0 pointer-events-none opacity-0 dark:opacity-[0.22] transition-opacity duration-300"
                 style={{
@@ -26,36 +33,6 @@ export default function Hero() {
                     backgroundSize: "20px 20px"
                 }}
             />
-
-            {/* Ambient Glows - Controlled via dark mode context */}
-            <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none mix-blend-multiply dark:mix-blend-screen transition-opacity duration-300">
-                {/* Left Blue Glow */}
-                <div
-                    className="absolute left-[-10%] top-[5%] w-120 h-120 md:w-200 md:h-200 rounded-full opacity-[0.08] dark:opacity-[0.05]"
-                    style={{
-                        background: "radial-gradient(circle, #2563eb 0%, transparent 70%)",
-                        filter: "blur(120px)",
-                    }}
-                />
-
-                {/* Right Cyan Glow */}
-                <div
-                    className="absolute right-[-10%] bottom-[5%] w-120 h-120 md:w-200 md:h-200 rounded-full opacity-[0.06] dark:opacity-[0.03]"
-                    style={{
-                        background: "radial-gradient(circle, #06b6d4 0%, transparent 70%)",
-                        filter: "blur(120px)",
-                    }}
-                />
-
-                {/* Faded Angled Top-Left Sheen */}
-                <div
-                    className="absolute left-[-15%] top-[-10%] w-160 h-60 md:w-240 md:h-80 rotate-35 opacity-[0.03] dark:opacity-[0.02]"
-                    style={{
-                        background: "linear-gradient(to right, transparent, rgba(100,100,100,0.2), transparent)",
-                        filter: "blur(100px)",
-                    }}
-                />
-            </div>
 
             {/* Content Container */}
             <div className="relative z-20 flex flex-col justify-center items-center w-full max-w-3xl mx-auto text-center pt-28">

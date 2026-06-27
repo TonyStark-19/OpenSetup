@@ -29,14 +29,17 @@ const firstRow = [...stackData];
 const secondRow = [...stackData].reverse();
 
 // import components
-import Header from "../../components/stack/Header";
-import ScrollingStacks from "../../components/stack/ScrollingStacks";
-import Stats from "../../components/stack/Stats";
+import Header from "../../components/home/stack/Header";
+import ScrollingStacks from "../../components/home/stack/ScrollingStacks";
+import Stats from "../../components/home/stack/Stats";
 
 // tech stacks section
 export default function TechStacks() {
     return (
-        <section className="relative flex flex-col justify-center items-center py-24 bg-white dark:bg-[#0a0a0a] overflow-hidden transition-colors duration-300">
+        <section
+            className="relative flex flex-col justify-center items-center py-24 bg-white dark:bg-[#0a0a0a] overflow-hidden 
+            transition-colors duration-300 border-t border-zinc-200 dark:border-zinc-900"
+        >
             {/* Header Content */}
             <Header />
 
