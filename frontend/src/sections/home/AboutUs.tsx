@@ -34,6 +34,7 @@ export default function AboutUs() {
         >
             {/* Sync structured container width layout */}
             <div className="w-full max-w-7xl flex flex-col gap-12">
+                {/* about header */}
                 <AboutHeader />
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-4 w-full items-stretch">
