@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import RequestsPage from "./pages/RequestsPage";
+import ContributePage from "./pages/ContributePage";
 
 // main routing app component
 export default function App(): React.JSX.Element {
@@ -16,6 +17,7 @@ export default function App(): React.JSX.Element {
       <Route path="/" element={<HomePage />} />
       <Route path="/get-started" element={<AuthPage />} />
       <Route path="/request" element={<RequestsPage />} />
+      <Route path="/contribute" element={<ContributePage />} />
     </Routes>
   )
 }
