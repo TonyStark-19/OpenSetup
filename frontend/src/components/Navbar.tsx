@@ -8,7 +8,11 @@ import { Link } from "react-router-dom";
 import { Terminal, Sun, Moon } from "lucide-react";
 
 // navlinks data
-const Navlinks = ["Browse Guides", "Requests", "Contribute"];
+const Navlinks = [
+    { title: "Browse Guides", link: "/guides" },
+    { title: "Requests", link: "/request" },
+    { title: "Contribute", link: "/contribute" }
+];
 
 // navbar component
 export default function Navbar() {
@@ -52,13 +56,15 @@ export default function Navbar() {
                 {/* Navlinks / Center Section */}
                 <div className="hidden md:flex flex-row justify-center items-center gap-7 flex-1">
                     {Navlinks.map((navlink, idx) => (
-                        <p
-                            key={idx}
-                            className="text-zinc-500 dark:text-[#888a8e] hover:text-zinc-900 dark:hover:text-[#EDEEF0] transition 
-                            text-[14px] font-medium cursor-pointer"
-                        >
-                            {navlink}
-                        </p>
+                        <Link to={navlink.link}>
+                            <p
+                                key={idx}
+                                className="text-zinc-500 dark:text-[#888a8e] hover:text-zinc-900 dark:hover:text-[#EDEEF0] transition 
+                                text-[14px] font-medium cursor-pointer"
+                            >
+                                {navlink.title}
+                            </p>
+                        </Link>
                     ))}
                 </div>
 
