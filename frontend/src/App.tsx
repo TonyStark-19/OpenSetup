@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import RequestsPage from "./pages/RequestsPage";
 import ContributePage from "./pages/ContributePage";
+import BrowseGuidesPage from "./pages/BrowseGuidesPage";
 
 // import scroll to top component
 import ScrollToTop from "./components/utils/Scroltotop";
@@ -24,6 +25,7 @@ export default function App(): React.JSX.Element {
         <Route path="/get-started" element={<AuthPage />} />
         <Route path="/request" element={<RequestsPage />} />
         <Route path="/contribute" element={<ContributePage />} />
+        <Route path="/guides" element={<BrowseGuidesPage />} />
       </Routes>
     </>
   )
