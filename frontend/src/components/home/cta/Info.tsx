@@ -1,6 +1,12 @@
 // import icons
 import { FaPlus } from "react-icons/fa6";
 
+// metric box data
+const metricBox = [
+    { text: "Active Build", count: "12", ping: true },
+    { text: "Contributors", count: "100+", ping: false }
+]
+
 // info component
 export default function Info() {
     return (
@@ -25,6 +31,7 @@ export default function Info() {
                     >
                         <FaPlus size={12} />
                     </div>
+
                     <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-600 font-semibold tracking-wider uppercase">#REQ-284</span>
                 </div>
 
@@ -32,7 +39,7 @@ export default function Info() {
                     <div className="flex items-center border-b border-emerald-500/20 dark:border-emerald-500/30 w-max pb-1 mb-2">
                         <span
                             className="text-[10px] font-mono font-black tracking-wider text-emerald-600 dark:text-[#3bff61] 
-                            bg-emerald-500/5 dark:bg-[#3bff61]/5 px-1.5 py-0.5 rounded-sm"
+                            px-1.5 py-0.5 rounded-sm"
                         >
                             PENDING_REVIEW
                         </span>
@@ -48,40 +55,27 @@ export default function Info() {
                 </div>
             </div>
 
-            {/* Metric Box 1 */}
-            <div
-                className="flex flex-col justify-between bg-zinc-50/50 dark:bg-[#0b0b0d]/60 backdrop-blur-md border 
-                border-zinc-200 dark:border-zinc-900 p-5 hover:border-zinc-300 dark:hover:border-zinc-800 transition-all 
-                duration-300 group shadow-sm dark:shadow-none"
-            >
-                <span
-                    className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 dark:text-zinc-500 
-                    group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors uppercase"
+            {/* Metric Boxs */}
+            {metricBox.map((box, idx) => (
+                <div
+                    key={idx}
+                    className="flex flex-col justify-between bg-zinc-50/50 dark:bg-[#0b0b0d]/60 backdrop-blur-md border 
+                    border-zinc-200 dark:border-zinc-900 p-5 hover:border-zinc-300 dark:hover:border-zinc-800 transition-all 
+                    duration-300 group shadow-sm dark:shadow-none"
                 >
-                    Active Build
-                </span>
+                    <span
+                        className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 dark:text-zinc-500 
+                        group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors uppercase"
+                    >
+                        {box.text}
+                    </span>
 
-                <div className="flex items-baseline gap-2 mt-4">
-                    <span className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-[#EDEEF0] transition-colors">12</span>
-                    <span className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981] mb-1 animate-pulse"></span>
+                    <div className="flex items-baseline gap-2 mt-4">
+                        <span className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-[#EDEEF0] transition-colors">{box.count}</span>
+                        {box.ping && <span className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981] mb-1 animate-pulse"></span>}
+                    </div>
                 </div>
-            </div>
-
-            {/* Metric Box 2 */}
-            <div
-                className="flex flex-col justify-between bg-zinc-50/50 dark:bg-[#0b0b0d]/60 backdrop-blur-md border 
-                border-zinc-200 dark:border-zinc-900 p-5 hover:border-zinc-300 dark:hover:border-zinc-800 transition-all 
-                duration-300 group shadow-sm dark:shadow-none"
-            >
-                <span
-                    className="text-[10px] font-mono font-bold tracking-wider text-zinc-400 dark:text-zinc-500 
-                    group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors uppercase"
-                >
-                    Contributors
-                </span>
-
-                <span className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-[#EDEEF0] mt-4 transition-colors">100+</span>
-            </div>
+            ))}
         </div>
     );
 }

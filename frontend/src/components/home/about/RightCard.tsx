@@ -96,9 +96,9 @@ export default function RightCard({ codeString, handleCopy, copied, stacks }: Ri
                             <div
                                 key={idx}
                                 className="border border-zinc-200 dark:border-[#252628] bg-white dark:bg-[#1d1d1f] 
-                                px-2.5 py-0.5 rounded-md shadow-sm transition-colors"
+                                px-2.5 py-0.5 rounded-sm shadow-sm transition-colors"
                             >
-                                <h4 className="uppercase text-zinc-600 dark:text-[#EDEEF0] font-mono text-[10px] font-bold tracking-wide mt-0.5">{stack}</h4>
+                                <h4 className="uppercase text-zinc-600 dark:text-[#EDEEF0] font-mono text-[10px] font-medium tracking-wide mt-0.5">{stack}</h4>
                             </div>
                         ))}
                     </div>
@@ -121,7 +121,7 @@ export default function RightCard({ codeString, handleCopy, copied, stacks }: Ri
                     </div>
 
                     <p
-                        className="text-[11px] font-mono font-medium text-zinc-400 dark:text-[#3e3d3f] bg-zinc-100 
+                        className="text-[11px] font-mono font-medium text-zinc-600 dark:text-[#4e4c4f] bg-zinc-100 
                         dark:bg-zinc-950 px-2.5 py-1.5 rounded-md border border-zinc-200 dark:border-zinc-900/40 w-max transition-colors"
                     >
                         npx opensetup init --full-stack

@@ -1,9 +1,6 @@
 // import hooks
 import { useState, useEffect } from "react";
 
-// Read the markdown file natively as a raw text string
-import rawMarkdownContent from "../../guides/quick-start-vite.md?raw";
-
 // metadata interface
 export interface GuideMetadata {
     title: string;
@@ -47,7 +44,19 @@ export default function GuidePanel() {
     const [markdownText, setMarkdownText] = useState<string>("");
 
     useEffect(() => {
-        setMarkdownText(rawMarkdownContent);
+        fetch("/guides/quick-start-vite.md")
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to fetch markdown file");
+                return res.text();
+            })
+            .then((text) => {
+                setMarkdownText(text);
+            })
+            .catch((err) => {
+                console.error("Error loading blueprint template:", err);
+                // Fallback default text if the file fails to fetch
+                setMarkdownText("# Quickstart Guide\n\nFailed to load template content dynamically.");
+            });
     }, []);
 
     // handle copy

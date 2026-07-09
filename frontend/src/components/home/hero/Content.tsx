@@ -1,6 +1,9 @@
 // import icons
 import { ArrowRight, GitPullRequestArrow } from "lucide-react";
 
+// import link
+import { Link } from "react-router-dom";
+
 // hero content component
 export default function Content() {
     return (
@@ -40,27 +43,31 @@ export default function Content() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row justify-center items-center mt-10 gap-3 w-full sm:w-auto">
-                <button
-                    className="w-full sm:w-auto bg-zinc-900 dark:bg-[#EDEEF0] hover:bg-zinc-800 dark:hover:bg-white rounded-full 
-                    text-white dark:text-black text-sm font-semibold py-3 px-8 cursor-pointer transition-all active:scale-[0.98] shadow-sm shadow-black/5"
-                >
-                    Browse setups
-                </button>
+                <Link to="/guides">
+                    <button
+                        className="w-full sm:w-auto bg-zinc-900 dark:bg-[#EDEEF0] hover:bg-zinc-800 dark:hover:bg-white rounded-full 
+                        text-white dark:text-black text-sm font-semibold py-3 px-8 cursor-pointer transition-all active:scale-[0.98] shadow-sm shadow-black/5"
+                    >
+                        Browse setups
+                    </button>
+                </Link>
 
-                <button
-                    className="w-full sm:w-auto bg-zinc-50 dark:bg-[#121214] hover:bg-zinc-100 dark:hover:bg-[#1a1a1e] border 
-                    border-zinc-200 dark:border-[#262629] hover:border-zinc-300 dark:hover:border-[#38383c] rounded-full 
-                    text-zinc-800 dark:text-[#EDEEF0] text-sm font-semibold py-3 px-6 cursor-pointer flex flex-row justify-center items-center 
-                    gap-2 transition-all active:scale-[0.98]"
-                >
-                    <GitPullRequestArrow size={15} className="text-zinc-400 dark:text-[#888a8e]" />
-                    Contribute a guide
-                </button>
+                <Link to="/contribute">
+                    <button
+                        className="w-full sm:w-auto bg-zinc-50 dark:bg-[#121214] hover:bg-zinc-100 dark:hover:bg-[#1a1a1e] border 
+                        border-zinc-200 dark:border-[#262629] hover:border-zinc-300 dark:hover:border-[#38383c] rounded-full 
+                        text-zinc-800 dark:text-[#EDEEF0] text-sm font-semibold py-3 px-6 cursor-pointer flex flex-row justify-center items-center 
+                        gap-2 transition-all active:scale-[0.98]"
+                    >
+                        <GitPullRequestArrow size={15} className="text-zinc-400 dark:text-[#888a8e]" />
+                        Contribute a guide
+                    </button>
+                </Link>
             </div>
 
             {/* Bottom Stats Meta */}
             <p className="text-zinc-400 dark:text-[#525256] text-xs md:text-sm mt-8 tracking-wide font-medium transition-colors duration-300">
-                OPEN SOURCE · <span className="text-zinc-900 dark:text-[#EDEEF0] hover:underline underline-offset-4 cursor-pointer font-semibold">
+                OPEN SOURCE · <span className="text-zinc-900 dark:text-[#EDEEF0] hover:underline underline-offset-4 cursor-default font-semibold">
                     50+ GUIDES
                 </span>{" "}
                 · COMMUNITY MAINTAINED

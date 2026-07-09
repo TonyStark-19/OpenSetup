@@ -12,7 +12,7 @@ interface ScrollingRequests {
 export default function ScrollingRequests({ TICKER_ROW_1, TICKER_ROW_2, getStatusStyles }: ScrollingRequests) {
     return (
         <div
-            className="w-full relative flex flex-col gap-4 pb-8 pt-5 
+            className="w-full relative flex flex-col gap-4 pb-4 pt-5 
             bg-zinc-50/20 dark:bg-black/10 pointer-events-none select-none overflow-hidden mb-6"
         >
             {/* Visual Edge Blur Masking Vignettes */}

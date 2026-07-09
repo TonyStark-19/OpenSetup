@@ -25,7 +25,7 @@ export default function RequestForm(
     return (
         <div
             className="lg:col-span-5 bg-zinc-50/50 dark:bg-[#0d0d0f]/60 backdrop-blur-md border border-zinc-200 
-            dark:border-zinc-900 rounded-2xl p-6 shadow-xl dark:shadow-2xl transition-all"
+            dark:border-zinc-900 rounded-2xl px-6 py-8 shadow-xl dark:shadow-2xl transition-all"
         >
             <form
                 onSubmit={handleSubmit}
