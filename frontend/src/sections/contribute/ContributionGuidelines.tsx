@@ -1,29 +1,41 @@
 // import icons 
-import { Code2, Clock, AlertTriangle } from "lucide-react";
+import { Code2, Clock, AlertTriangle, CheckCircle, FileText, Sparkles } from "lucide-react";
+
+const rules = [
+    {
+        icon: <AlertTriangle size={14} className="text-zinc-500" />,
+        title: "Use the template",
+        desc: "Download the starter shell structure to align with core engine schemas."
+    },
+    {
+        icon: <Code2 size={14} className="text-zinc-500" />,
+        title: "Fenced code blocks",
+        desc: "Every command syntax line must contain appropriate language tags (e.g., bash, json)."
+    },
+    {
+        icon: <Clock size={14} className="text-zinc-500" />,
+        title: "Keep it current",
+        desc: "Tag accurate framework releases. Outdated pipelines get automatically flagged."
+    },
+    {
+        icon: <FileText size={14} className="text-zinc-500" />,
+        title: "Define frontmatter",
+        desc: "Include all metadata blocks at the top: title, description, category, and tech tags."
+    },
+    {
+        icon: <CheckCircle size={14} className="text-zinc-500" />,
+        title: "Verify commands",
+        desc: "Test installation scripts locally before submitting to prevent broken runtime states."
+    },
+    {
+        icon: <Sparkles size={14} className="text-zinc-500" />,
+        title: "Clean explanations",
+        desc: "Keep step descriptions brief and direct. Document *why* configuration steps matter."
+    }
+];
 
 // contribution guidelines component
 export default function ContributionGuidelines() {
-    const rules = [
-        {
-            icon: <AlertTriangle size={14} className="text-zinc-500" />,
-
-            title: "Use the template",
-            desc: "Download the starter shell structure to align with core engine schemas."
-        },
-        {
-            icon: <Code2 size={14} className="text-zinc-500" />,
-
-            title: "Fenced code blocks",
-            desc: "Every command syntax line must contain appropriate language tags."
-        },
-        {
-            icon: <Clock size={14} className="text-zinc-500" />,
-
-            title: "Keep it current",
-            desc: "Tag accurate framework releases. Outdated pipelines get flagged."
-        },
-    ];
-
     return (
         <div className="flex flex-col gap-4 lg:sticky lg:top-28 select-none">
             <h4 className="text-[10px] font-mono font-bold tracking-widest text-zinc-400 dark:text-zinc-600 uppercase px-1">

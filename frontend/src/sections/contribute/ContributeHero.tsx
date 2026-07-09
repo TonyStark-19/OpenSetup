@@ -1,5 +1,5 @@
 // import icons 
-import { FileText, Upload, GitPullRequest, Eye, CheckCircle2 } from "lucide-react";
+import { FileText, Upload, Eye, CheckCircle2, LayoutDashboard } from "lucide-react";
 
 // main steps props
 export interface MainStepsProps {
@@ -24,14 +24,14 @@ const mainSteps: MainStepsProps[] = [
         bg: "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/40"
     },
     {
-        title: "PR opens",
-        desc: "Auto-created on GitHub PR",
-        icon: <GitPullRequest size={16} className="text-amber-500" />,
+        title: "Admin queue",
+        desc: "Request goes to admin panel",
+        icon: <LayoutDashboard size={16} className="text-amber-500" />,
         bg: "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/40"
     },
     {
         title: "Review",
-        desc: "Maintainer check verification",
+        desc: "Admin check verification",
         icon: <Eye size={16} className="text-zinc-500" />,
         bg: "bg-zinc-100 dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800"
     },
