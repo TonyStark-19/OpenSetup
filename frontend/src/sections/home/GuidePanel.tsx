@@ -43,6 +43,7 @@ export default function GuidePanel() {
     const [upvoteCount, setUpvoteCount] = useState(MOCK_METADATA.upvotes);
     const [markdownText, setMarkdownText] = useState<string>("");
 
+    // fetch markdown
     useEffect(() => {
         fetch("/guides/quick-start-vite.md")
             .then((res) => {

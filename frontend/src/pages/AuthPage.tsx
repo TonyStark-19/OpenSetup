@@ -30,7 +30,10 @@ const features = [
 export default function AuthPage() {
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-[#0a0a0a] flex flex-col justify-center items-center px-8 overflow-hidden pt-20 lg:pt-0 transition-colors duration-300">
+    <div
+      className="relative min-h-screen bg-white dark:bg-[#0a0a0a] flex flex-col justify-center items-center px-8 overflow-hidden pt-20 
+      lg:pt-0 transition-colors duration-300"
+    >
       {/* Floating Back button */}
       <BackToHome />
 

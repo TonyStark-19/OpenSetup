@@ -26,7 +26,7 @@ export default function StepsGrid({ stacks }: { stacks: string[] }) {
                         size={14}
                         className="text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors"
                     />
-                    
+
                     <h3 className="text-lg font-bold tracking-tight">Browse the catalog</h3>
                 </div>
 
@@ -41,9 +41,10 @@ export default function StepsGrid({ stacks }: { stacks: string[] }) {
                         return (
                             <div
                                 key={idx}
-                                className={`border px-2.5 py-0.5 rounded-md font-mono transition-colors shadow-sm dark:shadow-none ${isDocker
-                                    ? "border-emerald-200 dark:border-emerald-950 bg-emerald-50 dark:bg-emerald-950/20"
-                                    : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0e0e10]"
+                                className={`border px-2.5 py-0.5 rounded-md font-mono transition-colors shadow-sm dark:shadow-none 
+                                ${isDocker
+                                        ? "border-emerald-200 dark:border-emerald-950 bg-emerald-50 dark:bg-emerald-950/20"
+                                        : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0e0e10]"
                                     }`}
                             >
                                 <h4
@@ -126,7 +127,7 @@ export default function StepsGrid({ stacks }: { stacks: string[] }) {
                 </div>
 
                 <p className="text-zinc-500 dark:text-zinc-400 text-[13px] leading-relaxed mb-6 min-h-15 transition-colors">
-                    Know a setup others would find useful? Write it in markdown and open a GitHub PR. Get merged and credited.
+                    Know a setup others would find useful? Write it in Markdown and submit it for review. If approved, it will be published with credit to you.
                 </p>
 
                 {/* Git Log Dynamic Logs */}

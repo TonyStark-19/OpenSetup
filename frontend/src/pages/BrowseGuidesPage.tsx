@@ -145,7 +145,8 @@ export default function BrowseGuidesPage() {
             {/* main content */}
             <div
                 className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white py-24 min-h-screen 
-                flex flex-col items-center justify-start transition-colors duration-300">
+                flex flex-col items-center justify-start transition-colors duration-300"
+            >
                 <div className="w-full max-w-7xl px-4 md:px-8 flex flex-col items-start justify-start">
                     {/* header */}
                     <BrowseGuideHeader

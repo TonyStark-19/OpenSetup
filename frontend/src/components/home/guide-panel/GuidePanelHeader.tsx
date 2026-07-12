@@ -44,7 +44,7 @@ export default function GuidePanelHeader({ MOCK_METADATA, viewMode, setViewMode 
                     <div
                         className={`absolute top-1 bottom-1 left-1 w-16 bg-white dark:bg-[#1c1c21] border border-zinc-200 
                         dark:border-[#313135] shadow-sm dark:shadow-none rounded-md transition-all duration-200 ease-out transform 
-                            ${viewMode === "raw" ? "translate-x-16"
+                        ${viewMode === "raw" ? "translate-x-16"
                                 : "translate-x-0"
                             }`}
                     />
@@ -52,7 +52,7 @@ export default function GuidePanelHeader({ MOCK_METADATA, viewMode, setViewMode 
                     <button
                         onClick={() => setViewMode("preview")}
                         className={`relative z-10 w-1/2 text-center text-xs font-medium transition-colors duration-150 cursor-pointer 
-                            ${viewMode === "preview" ? "text-zinc-900 dark:text-white"
+                        ${viewMode === "preview" ? "text-zinc-900 dark:text-white"
                                 : "text-zinc-500 dark:text-[#888a8e] hover:text-zinc-900 dark:hover:text-[#EDEEF0]"
                             }`}
                     >
@@ -62,7 +62,7 @@ export default function GuidePanelHeader({ MOCK_METADATA, viewMode, setViewMode 
                     <button
                         onClick={() => setViewMode("raw")}
                         className={`relative z-10 w-1/2 text-center text-xs font-medium transition-colors duration-150 cursor-pointer 
-                            ${viewMode === "raw" ? "text-zinc-900 dark:text-white"
+                        ${viewMode === "raw" ? "text-zinc-900 dark:text-white"
                                 : "text-zinc-500 dark:text-[#888a8e] hover:text-zinc-900 dark:hover:text-[#EDEEF0]"
                             }`}
                     >

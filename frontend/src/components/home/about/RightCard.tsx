@@ -115,6 +115,7 @@ export default function RightCard({ codeString, handleCopy, copied, stacks }: Ri
                             <IoMdArrowForward size={18} className="text-zinc-300 dark:text-[#1d2329] group-hover:text-zinc-900 
                             dark:group-hover:text-[#EDEEF0] group-hover:translate-x-0.5 transition-all duration-200" />
                         </div>
+
                         <p className="text-zinc-500 dark:text-[#888a8e] text-[13px] leading-relaxed mt-2.5 transition-colors">
                             Production-ready snippets that just work. No more boilerplate hell.
                         </p>

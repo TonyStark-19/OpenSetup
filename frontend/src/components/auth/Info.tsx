@@ -57,7 +57,7 @@ export default function Info({ features }: InfoProps) {
                             <h4 className="text-[13px] font-semibold text-zinc-900 dark:text-[#EDEEF0] transition-colors">
                                 {feature.title}
                             </h4>
-                            
+
                             <p className="text-zinc-500 dark:text-[#888a8e] text-xs mt-0.5 transition-colors">
                                 {feature.description}
                             </p>

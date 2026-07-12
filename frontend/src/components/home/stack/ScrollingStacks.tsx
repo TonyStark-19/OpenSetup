@@ -1,5 +1,5 @@
 // import props
-import type { StackItem } from "../../sections/stack/TechStacks";
+import type { StackItem } from "../../../sections/home/TechStacks";
 
 // scrollstacks props
 interface ScrollingStacksProps {

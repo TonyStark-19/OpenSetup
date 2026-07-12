@@ -13,6 +13,7 @@ export default function AuthCard() {
                     <h3 className="text-zinc-900 dark:text-[#EDEEF0] text-2xl font-bold tracking-tight transition-colors">
                         Get Started
                     </h3>
+
                     <p className="text-zinc-500 dark:text-[#888a8e] text-[13px] font-medium mt-1.5 transition-colors">
                         Join the network to track and share configurations.
                     </p>

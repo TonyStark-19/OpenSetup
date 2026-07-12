@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react";
 
 // scroll below indicator
 export default function ScrollBelow() {
+    // handle scroll
     const handleScroll = () => {
         window.scrollTo({
             top: window.innerHeight * 0.85,

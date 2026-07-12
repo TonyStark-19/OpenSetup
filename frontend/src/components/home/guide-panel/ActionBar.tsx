@@ -63,7 +63,7 @@ export default function ActionBar({ MOCK_METADATA, handleUpvote, upvoted, upvote
                     onClick={handleUpvote}
                     className={`flex items-center gap-1.5 border rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer 
                     shadow-sm dark:shadow-none 
-                        ${upvoted
+                    ${upvoted
                             ? "bg-emerald-50 dark:bg-[#14261d] text-emerald-600 dark:text-[#4ade80] border-emerald-200 dark:border-[#1f3d2f]"
                             : "bg-white dark:bg-[#1c1c21] hover:bg-zinc-50 dark:hover:bg-[#25252b] text-zinc-800 dark:text-white border-zinc-200 dark:border-[#313135] hover:border-zinc-300 dark:hover:border-zinc-600"
                         }`}
