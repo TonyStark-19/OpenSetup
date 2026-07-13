@@ -125,7 +125,7 @@ router.get(
         );
 
         // Redirect back to frontend home page, attaching token as a query parameter
-        res.redirect(`${CLIENT_URL}/?token=${token}`);
+        res.redirect(`${CLIENT_URL}/auth/callback?token=${token}`);
     }
 );
 

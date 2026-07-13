@@ -1,11 +1,14 @@
 // import icons
 import { Sparkles, Code2, Users } from "lucide-react";
 
+// import toaster
+import { Toaster } from "react-hot-toast";
+
 // import components
 import BackToHome from "../components/auth/BackToHome";
 import GridPattern from "../components/auth/GridPattern";
-import Info from "../components/auth/Info";
-import AuthCard from "../components/auth/AuthCard";
+import Info from "../sections/auth/Info";
+import AuthCard from "../sections/auth/AuthCard";
 
 // features data
 const features = [
@@ -28,12 +31,17 @@ const features = [
 
 // auth page
 export default function AuthPage() {
-
   return (
     <div
       className="relative min-h-screen bg-white dark:bg-[#0a0a0a] flex flex-col justify-center items-center px-8 overflow-hidden pt-20 
       lg:pt-0 transition-colors duration-300"
     >
+      {/* Global Toast Notification Container */}
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
+
       {/* Floating Back button */}
       <BackToHome />
 
@@ -45,8 +53,10 @@ export default function AuthPage() {
         {/* OpenSetup Info */}
         <Info features={features} />
 
-        {/* Authentication Card */}
-        <AuthCard />
+        {/* Authentication Card Frame */}
+        <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
+          <AuthCard />
+        </div>
       </div>
     </div>
   );

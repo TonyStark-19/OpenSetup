@@ -7,8 +7,19 @@ import type { FormEvent } from "react";
 // import icons
 import { FcGoogle } from "react-icons/fc";
 
-// auth card
+// import toast utilities
+import toast from "react-hot-toast";
+
+// import router hooks
+import { useNavigate } from "react-router-dom";
+
+// backend url
+const BACKEND_URL = "http://localhost:5000/auth";
+
+// auth card component
 export default function AuthCard() {
+    const navigate = useNavigate();
+
     // Mode toggle state: "login" or "signup"
     const [mode, setMode] = useState<"login" | "signup">("login");
 
@@ -17,22 +28,104 @@ export default function AuthCard() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    // Handle form submission
-    const handleSubmit = (e: FormEvent) => {
+    // Request lifecycle states
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Dynamic theme-aware configuration options for react-hot-toast
+    const toastConfig = {
+        style: {
+            background: document.documentElement.classList.contains("dark") ? "#161619" : "#ffffff",
+            color: document.documentElement.classList.contains("dark") ? "#EDEEF0" : "#18181b",
+            border: document.documentElement.classList.contains("dark") ? "1px solid #262629" : "1px solid #e4e4e7",
+            fontSize: "13px",
+            borderRadius: "12px",
+            padding: "12px 16px",
+        },
+        success: {
+            iconTheme: {
+                primary: "#10B981",
+                secondary: "#ffffff",
+            },
+        },
+        error: {
+            iconTheme: {
+                primary: "#EF4444",
+                secondary: "#ffffff",
+            },
+        },
+    };
+
+    // Handle standard credentials submission
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
         if (mode === "signup" && password !== confirmPassword) {
-            alert("Passwords do not match.");
+            toast.error("Passwords do not match.", toastConfig);
             return;
         }
 
-        // Handle your authentication logic here using current field values
+        setIsLoading(true);
+        // Create matching status toasts for both modes
+        const toastId = toast.loading(
+            mode === "login" ? "Verifying credentials..." : "Building your profile...",
+            toastConfig
+        );
 
-        console.log(`${mode} submission processing for:`, { email, password });
+        try {
+            const endpoint = mode === "signup" ? "/signup" : "/login";
+
+            const payload = mode === "signup"
+                ? { email, password, name: email.split("@")[0] }
+                : { email, password };
+
+            const response = await fetch(`${BACKEND_URL}${endpoint}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Something went wrong. Please try again.");
+            }
+
+            // Both routes now send back data.token
+            if (data.token) {
+                toast.success(
+                    mode === "login" ? "Welcome back! Initializing handshake..." : "Account built! Initializing handshake...",
+                    { ...toastConfig, id: toastId }
+                );
+
+                localStorage.setItem("authToken", data.token);
+
+                // Smoothly shift views to the standalone redirect page route
+                navigate("/auth/callback", { state: { provider: "Credentials" } });
+            } else {
+                // Fallback catch-all if backend configuration changes
+                toast.success("Success! Please log in.", { ...toastConfig, id: toastId });
+                setMode("login");
+                setPassword("");
+                setConfirmPassword("");
+            }
+        } catch (err: any) {
+            const errorMsg = err.message || "Unable to connect to authentication server.";
+            toast.error(errorMsg, { ...toastConfig, id: toastId });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Handle Google OAuth initialization 
+    const handleGoogleAuth = () => {
+        // Redirect directly onto the backend gateway passport framework
+        window.location.href = `${BACKEND_URL}/google`;
     };
 
     return (
-        <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
+        <div className="w-full flex justify-center lg:justify-end">
             <div
                 className="border border-zinc-200 dark:border-[#262629] bg-white/60 dark:bg-[#121214]/50 backdrop-blur-md rounded-2xl 
                 w-full max-w-md p-8 md:p-10 shadow-xl dark:shadow-2xl flex flex-col justify-center items-center transition-all duration-300"
@@ -54,10 +147,12 @@ export default function AuthCard() {
                 {/* Google OAuth Trigger */}
                 <button
                     type="button"
+                    onClick={handleGoogleAuth}
+                    disabled={isLoading}
                     className="w-full border border-zinc-200 dark:border-[#262629] bg-zinc-50 dark:bg-[#0c0c0e] hover:bg-zinc-100 
                     dark:hover:bg-[#161619] hover:border-zinc-300 dark:hover:border-[#38383c] py-2.5 flex flex-row justify-center 
                     items-center gap-2.5 mt-6 text-[13px] font-semibold text-zinc-800 dark:text-[#EDEEF0] rounded-xl cursor-pointer 
-                    transition-all active:scale-[0.99] shadow-sm dark:shadow-none"
+                    transition-all active:scale-[0.99] shadow-sm dark:shadow-none disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     <FcGoogle size={18} />
                     Continue with Google
@@ -75,7 +170,10 @@ export default function AuthCard() {
                 </div>
 
                 {/* Credentials Form Submission Portal */}
-                <form onSubmit={handleSubmit} className="w-full space-y-4">
+                <form
+                    onSubmit={handleSubmit}
+                    className="w-full space-y-4"
+                >
                     <div className="flex flex-col gap-1.5">
                         <label className="text-[10px] font-mono font-bold uppercase tracking-wide text-zinc-500 dark:text-zinc-400 pl-0.5">
                             Email address
@@ -84,12 +182,13 @@ export default function AuthCard() {
                         <input
                             type="email"
                             required
+                            disabled={isLoading}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="name@domain.com"
                             className="w-full bg-white dark:bg-[#070708] border border-zinc-200 dark:border-zinc-800 rounded-xl 
                             px-4 py-2.5 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 
-                            focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-700 shadow-inner"
+                            focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-700 shadow-inner disabled:opacity-60"
                         />
                     </div>
 
@@ -101,12 +200,13 @@ export default function AuthCard() {
                         <input
                             type="password"
                             required
+                            disabled={isLoading}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="••••••••"
                             className="w-full bg-white dark:bg-[#070708] border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 
                             py-2.5 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 
-                            focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-700 shadow-inner"
+                            focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-700 shadow-inner disabled:opacity-60"
                         />
                     </div>
 
@@ -120,22 +220,28 @@ export default function AuthCard() {
                             <input
                                 type="password"
                                 required
+                                disabled={isLoading}
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder="••••••••"
                                 className="w-full bg-white dark:bg-[#070708] border border-zinc-200 dark:border-zinc-800 rounded-xl 
                                 px-4 py-2.5 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 
-                                focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-700 shadow-inner"
+                                focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-700 shadow-inner disabled:opacity-60"
                             />
                         </div>
                     )}
 
                     <button
                         type="submit"
+                        disabled={isLoading}
                         className="w-full bg-zinc-900 dark:bg-white text-white dark:text-[#0a0a0a] py-2.5 mt-2 text-sm 
-                        font-semibold rounded-xl cursor-pointer hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all shadow-md active:scale-[0.99]"
+                        font-semibold rounded-xl cursor-pointer hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all 
+                        shadow-md active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {mode === "login" ? "Log In" : "Create Account"}
+                        {isLoading
+                            ? "Processing..."
+                            : mode === "login" ? "Log In" : "Create Account"
+                        }
                     </button>
                 </form>
 
@@ -145,9 +251,12 @@ export default function AuthCard() {
 
                     <button
                         type="button"
-                        onClick={() => setMode(mode === "login" ? "signup" : "login")}
+                        disabled={isLoading}
+                        onClick={() => {
+                            setMode(mode === "login" ? "signup" : "login");
+                        }}
                         className="text-purple-600 dark:text-purple-400 font-semibold underline hover:text-purple-500 
-                        bg-transparent p-0 border-none cursor-pointer"
+                        bg-transparent p-0 border-none cursor-pointer disabled:opacity-50"
                     >
                         {mode === "login" ? "Sign up instead" : "Log in instead"}
                     </button>

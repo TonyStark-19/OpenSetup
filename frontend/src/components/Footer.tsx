@@ -26,15 +26,15 @@ const socials: SocialProps[] = [
 
 // project links
 const projectLinks = [
-    { title: "Browse Guides", link: "/" },
-    { title: "Requests", link: "/" },
-    { title: "Contribute", link: "/" },
+    { title: "Browse Guides", link: "/guides" },
+    { title: "Requests", link: "/request" },
+    { title: "Contribute", link: "/contribute" },
 ];
 
 // other links
 const otherLinks = [
-    { title: "Start on GitHub", link: "/" },
-    { title: "Report an issue", link: "/" },
+    { title: "Start on GitHub", link: "https://github.com/TonyStark-19/OpenSetup" },
+    { title: "Report an issue", link: "https://github.com/TonyStark-19/OpenSetup/issues" },
 ];
 
 // footer component
@@ -117,13 +117,15 @@ export default function Footer() {
                     <ul className="flex flex-col gap-2.5">
                         {otherLinks.map((otherLink, idx) => (
                             <li key={idx}>
-                                <Link
-                                    to={otherLink.link}
+                                <a
+                                    href={otherLink.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-zinc-500 dark:text-[#888a8e] hover:text-zinc-900 dark:hover:text-[#EDEEF0] 
                                     transition-colors text-[14px] font-medium"
                                 >
                                     {otherLink.title}
-                                </Link>
+                                </a>
                             </li>
                         ))}
                     </ul>

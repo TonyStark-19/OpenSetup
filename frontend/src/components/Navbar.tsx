@@ -1,4 +1,4 @@
-// imporr usestate and useeffect
+// import usestate and useeffect
 import { useState, useEffect } from "react";
 
 // import link
@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 // import icons
 import { Terminal, Sun, Moon } from "lucide-react";
+
+// import custom auth hook
+import { useAuth } from "../hooks/useAuth";
 
 // navlinks data
 const Navlinks = [
@@ -16,6 +19,8 @@ const Navlinks = [
 
 // navbar component
 export default function Navbar() {
+    const { isLoggedIn, logout } = useAuth();
+
     // Theme toggle state
     const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
         const savedTheme = localStorage.getItem("theme");
@@ -53,13 +58,11 @@ export default function Navbar() {
                     </div>
                 </Link>
 
-                {/* Navlinks / Center Section */}
+                {/* Navlinks / Center Section - Rendered only post login */}
                 <div className="hidden md:flex flex-row justify-center items-center gap-7 flex-1">
-                    {Navlinks.map((navlink, idx) => (
-                        <Link to={navlink.link}>
-                            <p
-                                key={idx}
-                                className="text-zinc-500 dark:text-[#888a8e] hover:text-zinc-900 dark:hover:text-[#EDEEF0] transition 
+                    {isLoggedIn && Navlinks.map((navlink, idx) => (
+                        <Link key={idx} to={navlink.link}>
+                            <p className="text-zinc-500 dark:text-[#888a8e] hover:text-zinc-900 dark:hover:text-[#EDEEF0] transition 
                                 text-[14px] font-medium cursor-pointer"
                             >
                                 {navlink.title}
@@ -104,15 +107,27 @@ export default function Navbar() {
                     {/* separator line */}
                     <span className="h-4 w-px bg-zinc-200 dark:bg-[#262629]" />
 
-                    {/* get started */}
-                    <Link to="/get-started">
+                    {/* Dynamic Auth Action Node */}
+                    {isLoggedIn ? (
                         <button
-                            className="text-[14px] font-semibold cursor-pointer py-1.5 px-4 bg-zinc-900 dark:bg-[#EDEEF0] hover:bg-zinc-800 
-                            dark:hover:bg-white text-white dark:text-black rounded-full transition active:scale-[0.98]"
+                            onClick={logout}
+                            className="text-[14px] font-medium cursor-pointer py-1.5 px-4 rounded-full border border-zinc-200 dark:border-zinc-800 
+                            bg-zinc-50 dark:bg-[#121214] text-zinc-600 dark:text-[#888a8e] hover:text-red-600 dark:hover:text-red-400 
+                            hover:border-red-200 dark:hover:border-red-950/50 hover:bg-red-50/50 dark:hover:bg-red-950/20 
+                            transition-all duration-200 active:scale-[0.98]"
                         >
-                            Get Started
+                            Logout
                         </button>
-                    </Link>
+                    ) : (
+                        <Link to="/get-started">
+                            <button
+                                className="text-[14px] font-semibold cursor-pointer py-1.5 px-4 bg-zinc-900 dark:bg-[#EDEEF0] hover:bg-zinc-800 
+                                dark:hover:bg-white text-white dark:text-black rounded-full transition active:scale-[0.98]"
+                            >
+                                Get Started
+                            </button>
+                        </Link>
+                    )}
                 </div>
             </div>
         </nav>
