@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cookieSession from 'cookie-session';
 import passport from 'passport';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 // import routes
 import authRoutes from './routes/auth';
@@ -17,6 +18,16 @@ dotenv.config();
 // app and port initialisation
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Enable Cross-Origin Resource Sharing (CORS)
+app.use(
+    cors({
+        origin: process.env.CLIENT_URL || 'http://localhost:5173',
+        credentials: true, // Required for passport cookie sessions
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+    })
+);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI!)
@@ -33,6 +44,23 @@ app.use(
         keys: [process.env.COOKIE_KEY!]
     })
 );
+
+// Passport compatibility middleware for cookie-session
+app.use((req, res, next) => {
+    if (req.session && !req.session.regenerate) {
+        req.session.regenerate = (cb: any) => {
+            if (cb) cb();
+            return req.session;
+        };
+    }
+    if (req.session && !req.session.save) {
+        req.session.save = (cb: any) => {
+            if (cb) cb();
+            return req.session;
+        };
+    }
+    next();
+});
 
 // Initialize Passport sessions
 app.use(passport.initialize());

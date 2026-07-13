@@ -35,22 +35,36 @@ passport.use(
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
-                // Check if user already exists in DB
-                let existingUser = await User.findOne({ googleId: profile.id });
+                // 1. Check if user already exists by googleId
+                let user = await User.findOne({ googleId: profile.id });
 
-                if (existingUser) {
-                    return done(null, existingUser);
+                if (user) {
+                    return done(null, user);
                 }
 
-                // If not, extract email and create a new record
+                // Extract email from profile
                 const email = profile.emails && profile.emails[0]?.value;
                 if (!email) {
                     return done(new Error('No email found in Google profile'), undefined);
                 }
 
+                // 2. Check if a user with this email already exists (registered via local signup)
+                user = await User.findOne({ email: email.toLowerCase() });
+
+                if (user) {
+                    // Link the Google profile details to the existing account
+                    user.googleId = profile.id;
+                    if (!user.avatarUrl) {
+                        user.avatarUrl = profile.photos && profile.photos[0]?.value;
+                    }
+                    await user.save();
+                    return done(null, user);
+                }
+
+                // 3. If no account exists by googleId or email, create a new record
                 const newUser = await new User({
                     googleId: profile.id,
-                    email: email,
+                    email: email.toLowerCase(),
                     displayName: profile.displayName,
                     avatarUrl: profile.photos && profile.photos[0]?.value
                 }).save();
