@@ -17,6 +17,22 @@ export default function AuthSuccess() {
     const urlToken = searchParams.get("token");
     const provider: "Google" | "Credentials" = urlToken ? "Google" : (location.state?.provider || "Credentials");
 
+    // theme toggle states
+    const [isDarkMode] = useState(() => {
+        return localStorage.getItem("theme") === "dark";
+    });
+
+    // update dom
+    useEffect(() => {
+        if (isDarkMode) {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+        }
+    }, [isDarkMode]);
+
     // steps
     const steps = [
         provider === "Google"

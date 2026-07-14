@@ -1,3 +1,6 @@
+// import hooks
+import { useState, useEffect } from "react";
+
 // import icons
 import { Sparkles, Code2, Users } from "lucide-react";
 
@@ -31,6 +34,22 @@ const features = [
 
 // auth page
 export default function AuthPage() {
+  // theme toggle states
+  const [isDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+
+  // update dom
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDarkMode]);
+
   return (
     <div
       className="relative min-h-screen bg-white dark:bg-[#0a0a0a] flex flex-col justify-center items-center px-8 overflow-hidden pt-20 
