@@ -8,6 +8,7 @@ import cors from 'cors';
 
 // import routes
 import authRoutes from './routes/auth';
+import requestRoutes from './routes/requests';
 
 // import passport config
 import './config/passport';
@@ -68,6 +69,7 @@ app.use(passport.session());
 
 // Register API Routes
 app.use('/auth', authRoutes);
+app.use('/api/requests', requestRoutes);
 
 // Server check endpoint
 app.get('/', (req, res) => {
