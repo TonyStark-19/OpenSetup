@@ -93,8 +93,8 @@ const GUIDES_DATABASE: GuideCardData[] = [
 ];
 
 // import components
-import BrowseGuideHeader from "../components/browse-guides/BrowseGuideHeader";
-import GuidesGrid from "../components/browse-guides/GuidesGrid";
+import BrowseGuideHeader from "../sections/browse-guides/BrowseGuideHeader";
+import GuidesGrid from "../sections/browse-guides/GuidesGrid";
 
 // BrowseGuidesPage Component
 export default function BrowseGuidesPage() {

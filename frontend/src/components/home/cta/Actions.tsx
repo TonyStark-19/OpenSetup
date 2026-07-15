@@ -1,6 +1,9 @@
 // import icons
 import { FaArrowRight } from "react-icons/fa6";
 
+// import link
+import { Link } from "react-router-dom";
+
 // actions component
 export default function Actions() {
     return (
@@ -24,23 +27,27 @@ export default function Actions() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto mt-4">
-                <button
-                    className="flex items-center justify-center gap-2 bg-zinc-900 dark:bg-[#EDEEF0] text-white dark:text-[#0a0a0a] 
-                    px-7 py-3.5 rounded-lg text-sm font-semibold hover:bg-zinc-800 dark:hover:bg-white active:scale-[0.98] 
-                    transition-all duration-200 group cursor-pointer shadow-md dark:shadow-lg dark:shadow-black/20"
-                >
-                    Request a Guide
-                    <FaArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-200" />
-                </button>
+                <Link to="/request">
+                    <button
+                        className="flex items-center justify-center gap-2 bg-zinc-900 dark:bg-[#EDEEF0] text-white dark:text-[#0a0a0a] 
+                        px-7 py-3.5 rounded-lg text-sm font-semibold hover:bg-zinc-800 dark:hover:bg-white active:scale-[0.98] 
+                        transition-all duration-200 group cursor-pointer shadow-md dark:shadow-lg dark:shadow-black/20"
+                    >
+                        Request a Guide
+                        <FaArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-200" />
+                    </button>
+                </Link>
 
-                <button
-                    className="flex items-center justify-center bg-zinc-50 dark:bg-transparent text-zinc-800 dark:text-[#EDEEF0] 
-                    border border-zinc-200 dark:border-zinc-800/80 px-7 py-3.5 rounded-lg text-sm font-semibold hover:bg-zinc-100 
-                    dark:hover:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 active:scale-[0.98] transition-all 
-                    duration-200 cursor-pointer backdrop-blur-sm shadow-sm dark:shadow-none"
-                >
-                    Browse Guides
-                </button>
+                <Link to="/guides">
+                    <button
+                        className="flex items-center justify-center bg-zinc-50 dark:bg-transparent text-zinc-800 dark:text-[#EDEEF0] 
+                        border border-zinc-200 dark:border-zinc-800/80 px-7 py-3.5 rounded-lg text-sm font-semibold hover:bg-zinc-100 
+                        dark:hover:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 active:scale-[0.98] transition-all 
+                        duration-200 cursor-pointer backdrop-blur-sm shadow-sm dark:shadow-none"
+                    >
+                        Browse Guides
+                    </button>
+                </Link>
             </div>
         </div>
     );
