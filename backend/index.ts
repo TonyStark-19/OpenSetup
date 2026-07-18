@@ -10,6 +10,7 @@ import cors from 'cors';
 import authRoutes from './routes/auth';
 import requestRoutes from './routes/requests';
 import guideRoutes from "./routes/guides";
+import helperRoutes from "./routes/helpers";
 
 // import passport config
 import './config/passport';
@@ -72,6 +73,7 @@ app.use(passport.session());
 app.use('/auth', authRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/guides', guideRoutes);
+app.use('/api/guides', helperRoutes);
 
 // Server check endpoint
 app.get('/', (req, res) => {
