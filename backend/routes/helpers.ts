@@ -10,11 +10,11 @@ const router = Router();
 // Retrieve only the title of the absolute newest verified/active guide
 router.get('/helper/newest-title', async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
-        const newestGuide = await Guide.findOne({ 
-            status: { $in: ['Active', 'VERIFIED'] } 
+        const newestGuide = await Guide.findOne({
+            status: { $in: ['VERIFIED'] }
         })
-        .select('title') // Exclude all other fields for optimization
-        .sort({ createdAt: -1 });
+            .select('title') // Exclude all other fields for optimization
+            .sort({ createdAt: -1 });
 
         if (!newestGuide) {
             return res.status(404).json({
@@ -36,7 +36,7 @@ router.get('/helper/newest-title', async (req: Request, res: Response, next: Nex
 router.get('/helper/count', async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
         const totalCount = await Guide.countDocuments({
-            status: { $in: ['Active', 'VERIFIED'] }
+            status: { $in: ['VERIFIED'] }
         });
 
         return res.status(200).json({
