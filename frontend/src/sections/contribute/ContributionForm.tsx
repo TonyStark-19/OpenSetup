@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 // import type
 import type { KeyboardEvent, ChangeEvent, FormEvent } from "react";
 
-// import icons 
+// import icons
 import { GitPullRequest } from "lucide-react";
 
 // import toast utilities

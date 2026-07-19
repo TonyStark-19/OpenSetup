@@ -7,10 +7,19 @@ import ContributeHero from "../sections/contribute/ContributeHero";
 import ContributionForm from "../sections/contribute/ContributionForm";
 import ContributionGuidelines from "../sections/contribute/ContributionGuidelines";
 
+// import toaster
+import { Toaster } from "react-hot-toast";
+
 // Master Page Export Framework
 export default function ContributePage() {
     return (
         <>
+            {/* Global Toast Notification Container */}
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
+
             {/* navbar */}
             <Navbar />
 
