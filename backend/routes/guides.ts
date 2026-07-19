@@ -7,6 +7,9 @@ import { requireAuth } from '../middleware/auth';
 // import model
 import { Guide } from '../models/Guide';
 
+// import mail system
+import { sendMail } from '../utils/mail';
+
 // initialise router
 const router = Router();
 
@@ -49,6 +52,24 @@ router.post('/contribute', requireAuth, async (req: Request, res: Response, next
             status: 'Active'
         });
 
+        // send email
+        await sendMail(
+            "📘 New Guide Contribution",
+            `
+    <h2>New Guide Submitted</h2>
+
+    <p><strong>Title:</strong> ${title}</p>
+    <p><strong>Contributor:</strong> ${userEmail}</p>
+    <p><strong>Category:</strong> ${categoryOfGuide}</p>
+    <p><strong>Type:</strong> ${typeOfGuide}</p>
+    <p><strong>File:</strong> ${mdFileName}</p>
+
+    <hr/>
+
+    <p>Please review this guide in OpenSetup.</p>
+    `
+        );
+
         return res.status(201).json({
             success: true,
             message: 'Setup configuration guide logged into system index.',
@@ -62,9 +83,9 @@ router.post('/contribute', requireAuth, async (req: Request, res: Response, next
 // Retrieve all indexed workspace configuration guides
 router.get('/', async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
-        // Find guides that are either Active or Verified
+        // Find guides that are Verified
         const guides = await Guide.find({
-            status: { $in: ['Active', 'VERIFIED'] }
+            status: 'VERIFIED'
         }).sort({ createdAt: -1 });
 
         return res.status(200).json({
@@ -84,7 +105,7 @@ router.get('/top', async (req: Request, res: Response, next: NextFunction): Prom
             // 1. Filter for valid operational states
             {
                 $match: {
-                    status: { $in: ['Active', 'VERIFIED'] }
+                    status: 'VERIFIED'
                 }
             },
             // 2. Compute a dynamic popularity metric score fields row

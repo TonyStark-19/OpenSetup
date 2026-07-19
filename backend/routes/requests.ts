@@ -7,6 +7,9 @@ import { requireAuth } from '../middleware/auth';
 // import model
 import { RequestModel } from '../models/Request';
 
+// import mail system
+import { sendMail } from '../utils/mail';
+
 // initialise router
 const router = Router();
 
@@ -16,7 +19,7 @@ router.post('/', requireAuth, async (req: Request, res: Response, next: NextFunc
         const { title, tags, description } = req.body;
 
         // Cast req.user to access your custom properties safely
-        const authUser = req.user as { id: string; email: string } | undefined;
+        const authUser = (req as any).user as { id: string; email: string; } | undefined;
         const userEmail = authUser?.email;
 
         if (!title || !userEmail) {
@@ -51,6 +54,21 @@ router.post('/', requireAuth, async (req: Request, res: Response, next: NextFunc
             status: 'Open'
         });
 
+        await sendMail(
+            "📝 New Setup Request",
+            `
+    <h2>New Setup Request</h2>
+
+    <p><strong>Requested By:</strong> ${userEmail}</p>
+    <p><strong>Title:</strong> ${title}</p>
+    <p><strong>Description:</strong> ${description}</p>
+
+    <hr/>
+
+    <p>A new guide request has been submitted.</p>
+    `
+        );
+
         return res.status(201).json({
             success: true,
             message: 'Request submitted successfully',
@@ -64,7 +82,7 @@ router.post('/', requireAuth, async (req: Request, res: Response, next: NextFunc
 // Get all requests submitted by the logged-in user
 router.get('/my-requests', requireAuth, async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
-        const authUser = req.user as { id: string; email: string } | undefined;
+        const authUser = (req as any).user as { id: string; email: string; } | undefined;
         const userEmail = authUser?.email;
 
         const requests = await RequestModel.find({ email: userEmail }).sort({ createdAt: -1 });
