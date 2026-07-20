@@ -1,8 +1,8 @@
 // import react
-import React, { useEffect } from "react";
+import React from "react";
 
 // import routing components
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 // import route protection components
 import { ProtectedRoute } from "./components/utils/ProtectedRoute";
@@ -16,22 +16,11 @@ import ContributePage from "./pages/ContributePage";
 import BrowseGuidesPage from "./pages/BrowseGuidesPage";
 import AuthSuccess from "./pages/AuthSuccess";
 
-// import auth validation
-import { validateAuthToken } from "./hooks/validateAuthToken";
-
 // import scroll to top component
 import ScrollToTop from "./components/utils/Scroltotop";
 
 // main routing app component
 export default function App(): React.JSX.Element {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!validateAuthToken()) {
-      navigate("/get-started", { replace: true });
-    }
-  }, [navigate]);
-
   return (
     <>
       <ScrollToTop scrollRef={null} />

@@ -2,12 +2,15 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
+// import auth validation hook
+import { validateAuthToken } from '../../hooks/validateAuthToken';
+
 // public route
 export const PublicRoute = ({ children }: { children: React.ReactNode }) => {
-    const token = localStorage.getItem('authToken');
+    const isAuthenticated = validateAuthToken();
 
-    if (token) {
-        // If logged in, redirect away from auth pages to dashboard
+    if (isAuthenticated) {
+        // If logged in and token is valid, redirect away from auth pages to dashboard
         return <Navigate to="/" replace />;
     }
 
