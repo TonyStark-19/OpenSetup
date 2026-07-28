@@ -1,17 +1,36 @@
+// import routing
+import { Link } from "react-router-dom";
+
 // import icons
 import { Eye, ThumbsUp, CheckCircle2, Clock } from "lucide-react";
 
-// import type
-import type { GuideCardData } from "../../pages/BrowseGuidesPage";
+// Updated type definition matching grid items
+export interface GuideCardData {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    type: string;
+    views: number;
+    likes: number; // maps directly onto backend upvotes metric tracking keys
+    status: string;
+    icon: any;
+    iconColor: string;
+    iconBg: string;
+    createdAt: string;
+    mdFileName?: string;
+    contributedBy?: string;
+    profileImage?: string;
+}
 
 // guides grid prop
-interface GuidesGrid {
-    filteredGuides: GuideCardData[],
+interface GuidesGridProps {
+    filteredGuides: GuideCardData[];
     formatCount: (num: number) => string;
 }
 
 // guides grid
-export default function GuidesGrid({ filteredGuides, formatCount }: GuidesGrid) {
+export default function GuidesGrid({ filteredGuides, formatCount }: GuidesGridProps) {
     return (
         <>
             {filteredGuides.length > 0 ? (
@@ -20,12 +39,34 @@ export default function GuidesGrid({ filteredGuides, formatCount }: GuidesGrid) 
                         const IconComponent = guide.icon;
                         const isVerified = guide.status === "VERIFIED" || guide.status === "PENDING";
 
+                        // Slug defaults to mdFileName
+                        const guideSlug = guide.mdFileName;
+
+                        // Normalize payload object structure expected by GuideDetailPage
+                        const detailPayload = {
+                            _id: guide.id,
+                            id: guide.id,
+                            title: guide.title,
+                            description: guide.description,
+                            categoryOfGuide: guide.category,
+                            typeOfGuide: guide.type,
+                            views: guide.views,
+                            upvotes: guide.likes,
+                            status: guide.status,
+                            createdAt: guide.createdAt,
+                            mdFileName: guide.mdFileName || `${guide.id}.md`,
+                            contributedBy: guide.contributedBy || "adityachandel",
+                            profileImage: guide.profileImage || "/other/Profile.png",
+                        };
+
                         return (
-                            <div
+                            <Link
                                 key={guide.id}
+                                to={`/guides/${guideSlug}`}
+                                state={{ data: detailPayload }}
                                 className="flex flex-col bg-zinc-50/50 dark:bg-[#0e0e10] border border-zinc-200 
                                 dark:border-zinc-900 overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-800 
-                                transition-all duration-300 group shadow-sm dark:shadow-none"
+                                transition-all duration-300 group shadow-sm dark:shadow-none rounded-xl"
                             >
                                 {/* Card Upper Toolbar Banner Block */}
                                 <div
@@ -105,7 +146,7 @@ export default function GuidesGrid({ filteredGuides, formatCount }: GuidesGrid) 
                                         </div>
                                     )}
                                 </div>
-                            </div>
+                            </Link>
                         );
                     })}
                 </div>
@@ -119,5 +160,5 @@ export default function GuidesGrid({ filteredGuides, formatCount }: GuidesGrid) 
                 </div>
             )}
         </>
-    )
+    );
 }

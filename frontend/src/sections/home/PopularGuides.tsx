@@ -19,6 +19,10 @@ export interface PopularGuidesGridProps {
     icon: any;
     iconColor: string;
     iconBg: string;
+    createdAt: string;
+    mdFileName: string;
+    contributedBy: string;
+    profileImage: string;
 }
 
 // backend url
@@ -48,6 +52,10 @@ export default function PopularGuides() {
                             views: guide.views || 0,
                             likes: guide.upvotes || 0,
                             status: guide.status,
+                            createdAt: guide.createdAt,
+                            mdFileName: guide.mdFileName || `${guide._id}.md`,
+                            contributedBy: guide.contributedBy || "adityachandel",
+                            profileImage: guide.profileImage || "/other/Profile.png",
                             ...iconDesignStyle
                         };
                     });

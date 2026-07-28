@@ -1,3 +1,6 @@
+// import routing
+import { Link } from "react-router-dom";
+
 // import icons
 import { IoEyeSharp, IoShieldCheckmarkSharp } from "react-icons/io5";
 import { BiSolidLike } from "react-icons/bi";
@@ -21,11 +24,33 @@ export default function PopularGuidesGrid({ GUIDES_DATA }: { GUIDES_DATA: Popula
                 const Icon = guide.icon;
                 const isVerified = guide.status === "VERIFIED";
 
+                // Slug defaults to mdFileName or guide.id
+                const guideSlug = guide.mdFileName || guide.id;
+
+                // Normalize payload structure for GuideDetailPage
+                const detailPayload = {
+                    _id: guide.id,
+                    id: guide.id,
+                    title: guide.title,
+                    description: guide.description,
+                    categoryOfGuide: guide.category,
+                    typeOfGuide: guide.type,
+                    views: guide.views,
+                    upvotes: guide.likes,
+                    status: guide.status,
+                    createdAt: guide.createdAt,
+                    mdFileName: guide.mdFileName || `${guide.id}.md`,
+                    contributedBy: guide.contributedBy || "adityachandel",
+                    profileImage: guide.profileImage || "/other/Profile.png",
+                };
+
                 return (
-                    <div
+                    <Link
                         key={guide.id}
+                        to={`/guides/${guideSlug}`}
+                        state={{ data: detailPayload }}
                         className="flex flex-col bg-zinc-50/50 dark:bg-[#0e0e10] border border-zinc-200 dark:border-zinc-900 
-                        overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-800 transition-all duration-300 group shadow-sm dark:shadow-none"
+                        overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-800 transition-all duration-300 group shadow-sm dark:shadow-none rounded-xl"
                     >
                         {/* Card Header*/}
                         <div
@@ -104,7 +129,7 @@ export default function PopularGuidesGrid({ GUIDES_DATA }: { GUIDES_DATA: Popula
                                 </div>
                             )}
                         </div>
-                    </div>
+                    </Link>
                 );
             })}
         </div>
