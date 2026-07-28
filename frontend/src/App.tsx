@@ -15,6 +15,7 @@ import RequestsPage from "./pages/RequestsPage";
 import ContributePage from "./pages/ContributePage";
 import BrowseGuidesPage from "./pages/BrowseGuidesPage";
 import AuthSuccess from "./pages/AuthSuccess";
+import GuideDetailPage from "./pages/GuideDetailPage";
 
 // import scroll to top component
 import ScrollToTop from "./components/utils/Scroltotop";
@@ -43,6 +44,16 @@ export default function App(): React.JSX.Element {
         <Route
           path="/auth/callback"
           element={<AuthSuccess />}
+        />
+
+        {/* detail guide page */}
+        <Route
+          path="/guides/:slug"
+          element={
+            <ProtectedRoute>
+              <GuideDetailPage />
+            </ProtectedRoute>
+          }
         />
 
         {/* Protected Feature Routes */}
