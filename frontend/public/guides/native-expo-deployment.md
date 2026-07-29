@@ -1,7 +1,3 @@
-# React Native Android Deployment Guide with Expo EAS
-
-Deploy your React Native application as an installable Android APK using Expo Application Services (EAS).
-
 ## Prerequisites
 
 Before starting, make sure you have:

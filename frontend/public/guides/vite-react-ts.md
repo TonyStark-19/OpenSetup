@@ -1,7 +1,3 @@
-# Vite + React + TypeScript Setup Guide
-
-Set up a modern React application powered by Vite and TypeScript in just a few minutes.
-
 ## Prerequisites
 
 Before starting, make sure Node.js and npm are installed on your machine.

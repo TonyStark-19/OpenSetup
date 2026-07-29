@@ -1,7 +1,3 @@
-# Docker Desktop Setup Guide for Windows
-
-Install Docker Desktop on Windows and configure Windows Subsystem for Linux (WSL) to run containers locally.
-
 ## Prerequisites
 
 Before starting, make sure you have:

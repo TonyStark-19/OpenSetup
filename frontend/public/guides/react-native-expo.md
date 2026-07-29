@@ -1,7 +1,3 @@
-# React Native Setup Guide with Expo
-
-Build cross-platform mobile applications for Android and iOS using React Native and Expo.
-
 ## Prerequisites
 
 Before starting, make sure you have:

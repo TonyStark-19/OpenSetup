@@ -1,7 +1,3 @@
-# Tailwind CSS Setup Guide for Vite + React + TypeScript
-
-This guide will help you add Tailwind CSS to an existing Vite + React + TypeScript project.
-
 ## Prerequisites
 
 Make sure you have already created a Vite + React + TypeScript project.

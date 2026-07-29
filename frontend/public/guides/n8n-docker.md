@@ -1,7 +1,3 @@
-# n8n Setup Guide with Docker Desktop
-
-Run n8n locally using Docker Desktop and persist your workflows and credentials using Docker volumes.
-
 ## Prerequisites
 
 Before starting, make sure you have:
