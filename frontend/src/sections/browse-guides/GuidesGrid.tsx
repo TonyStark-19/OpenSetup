@@ -4,24 +4,8 @@ import { Link } from "react-router-dom";
 // import icons
 import { Eye, ThumbsUp, CheckCircle2, Clock } from "lucide-react";
 
-// Updated type definition matching grid items
-export interface GuideCardData {
-    id: string;
-    title: string;
-    description: string;
-    category: string;
-    type: string;
-    views: number;
-    likes: number; // maps directly onto backend upvotes metric tracking keys
-    status: string;
-    icon: any;
-    iconColor: string;
-    iconBg: string;
-    createdAt: string;
-    mdFileName?: string;
-    contributedBy?: string;
-    profileImage?: string;
-}
+// import tpye
+import type { GuideCardData } from "../../pages/BrowseGuidesPage";
 
 // guides grid prop
 interface GuidesGridProps {
@@ -39,8 +23,9 @@ export default function GuidesGrid({ filteredGuides, formatCount }: GuidesGridPr
                         const IconComponent = guide.icon;
                         const isVerified = guide.status === "VERIFIED" || guide.status === "PENDING";
 
-                        // Slug defaults to mdFileName
-                        const guideSlug = guide.mdFileName;
+                        // Strip .md extension from the URL slug so browser reloads route cleanly to React Router
+                        const rawFileName = guide.mdFileName || `${guide.id}.md`;
+                        const guideSlug = rawFileName.replace(/\.md$/, "");
 
                         // Normalize payload object structure expected by GuideDetailPage
                         const detailPayload = {
@@ -54,7 +39,7 @@ export default function GuidesGrid({ filteredGuides, formatCount }: GuidesGridPr
                             upvotes: guide.likes,
                             status: guide.status,
                             createdAt: guide.createdAt,
-                            mdFileName: guide.mdFileName || `${guide.id}.md`,
+                            mdFileName: rawFileName,
                             contributedBy: guide.contributedBy || "adityachandel",
                             profileImage: guide.profileImage || "/other/Profile.png",
                         };

@@ -80,7 +80,9 @@ export default function BrowseGuidesPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-    const [sortBy, setSortBy] = useState<"views" | "likes" | "newest">("views");
+
+    // Set default sort option to "newest" so the list remains static across view updates
+    const [sortBy, setSortBy] = useState<"views" | "likes" | "newest">("newest");
     const [isSortOpen, setIsSortOpen] = useState(false);
 
     // Static Category and Filter Rails matching layout constraints
@@ -145,7 +147,8 @@ export default function BrowseGuidesPage() {
         }).sort((a, b) => {
             if (sortBy === "views") return b.views - a.views;
             if (sortBy === "likes") return b.likes - a.likes;
-            // Native ISO String sorting handling for newest configuration releases
+
+            // "newest" sorting (default): static sort order based on creation date
             return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
     }, [guides, searchQuery, selectedCategory, selectedTypes, sortBy]);

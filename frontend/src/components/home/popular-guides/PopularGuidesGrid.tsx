@@ -24,8 +24,9 @@ export default function PopularGuidesGrid({ GUIDES_DATA }: { GUIDES_DATA: Popula
                 const Icon = guide.icon;
                 const isVerified = guide.status === "VERIFIED";
 
-                // Slug defaults to mdFileName or guide.id
-                const guideSlug = guide.mdFileName || guide.id;
+                // Strip .md extension from the URL slug so browser reloads route cleanly to React Router
+                const rawFileName = guide.mdFileName || `${guide.id}.md`;
+                const guideSlug = rawFileName.replace(/\.md$/, "");
 
                 // Normalize payload structure for GuideDetailPage
                 const detailPayload = {
@@ -39,7 +40,7 @@ export default function PopularGuidesGrid({ GUIDES_DATA }: { GUIDES_DATA: Popula
                     upvotes: guide.likes,
                     status: guide.status,
                     createdAt: guide.createdAt,
-                    mdFileName: guide.mdFileName || `${guide.id}.md`,
+                    mdFileName: rawFileName,
                     contributedBy: guide.contributedBy || "adityachandel",
                     profileImage: guide.profileImage || "/other/Profile.png",
                 };
