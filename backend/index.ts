@@ -27,7 +27,7 @@ app.use(
     cors({
         origin: process.env.CLIENT_URL || 'http://localhost:5173',
         credentials: true, // Required for passport cookie sessions
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
         allowedHeaders: ['Content-Type', 'Authorization']
     })
 );
