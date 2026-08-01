@@ -16,6 +16,8 @@ import ContributePage from "./pages/ContributePage";
 import BrowseGuidesPage from "./pages/BrowseGuidesPage";
 import AuthSuccess from "./pages/AuthSuccess";
 import GuideDetailPage from "./pages/GuideDetailPage";
+import ManageContributionsPage from "./pages/ManageContributionsPage";
+import ManageRequestsPage from "./pages/ManageRequestsPage";
 
 // import scroll to top component
 import ScrollToTop from "./components/utils/Scroltotop";
@@ -67,10 +69,28 @@ export default function App(): React.JSX.Element {
         />
 
         <Route
+          path="/manage/requests"
+          element={
+            <ProtectedRoute>
+              <ManageRequestsPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/contribute"
           element={
             <ProtectedRoute>
               <ContributePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/manage/contribution"
+          element={
+            <ProtectedRoute>
+              <ManageContributionsPage />
             </ProtectedRoute>
           }
         />
