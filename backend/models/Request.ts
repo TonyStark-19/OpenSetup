@@ -9,6 +9,7 @@ export interface IRequest extends Document {
     tags: string[];
     description?: string;
     status: 'Open' | 'In progress' | 'Rejected' | 'Pending';
+    statusReason?: string;
     createdAt: Date;
 }
 
@@ -41,7 +42,12 @@ const RequestSchema = new Schema<IRequest>({
     status: {
         type: String,
         enum: ['Open', 'In progress', 'Rejected', 'Pending'],
-        default: 'Open'
+        default: 'Pending'
+    },
+    statusReason: {
+        type: String,
+        trim: true,
+        default: 'Your request has been received and has not been worked on yet.'
     },
     createdAt: {
         type: Date,
