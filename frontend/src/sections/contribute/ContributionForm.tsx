@@ -2,7 +2,7 @@
 import { useState, useRef } from "react";
 
 // import type
-import type { KeyboardEvent, ChangeEvent, FormEvent } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 
 // import icons
 import { GitPullRequest } from "lucide-react";
@@ -41,9 +41,8 @@ export default function ContributionForm() {
     const [fileName, setFileName] = useState("");
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
-    const [category, setCategory] = useState("");
-    const [tags, setTags] = useState<string[]>(["Vite", "React", "TypeScript"]);
-    const [tagInput, setTagInput] = useState("");
+    const [category, setCategory] = useState(""); // Category (e.g. frontend, backend)
+    const [guideType, setGuideType] = useState(""); // Category type (e.g. SCAFFOLD, INTEGRATION)
 
     const [submissionType, setSubmissionType] = useState<"upload" | "editor">("upload");
     const [editorValue, setEditorValue] = useState("");
@@ -52,15 +51,6 @@ export default function ContributionForm() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    // Dynamic tag append parsing engine
-    const handleAddTag = (e: KeyboardEvent<HTMLInputElement>) => {
-        if ((e.key === "Enter" || e.key === ",") && tagInput.trim()) {
-            e.preventDefault();
-            if (!tags.includes(tagInput.trim())) setTags([...tags, tagInput.trim()]);
-            setTagInput("");
-        }
-    };
 
     // System file selector event triggers
     const triggerFileBrowser = () => {
@@ -86,8 +76,14 @@ export default function ContributionForm() {
         e.preventDefault();
 
         // 1. Initial Validation Rules Check
-        if (!title.trim() || !desc.trim() || !category.trim()) {
+        if (!title.trim() || !desc.trim() || !category.trim() || !guideType.trim() || !fileName.trim()) {
             toast.error("Please fulfill all form metadata parameters rows.", toastConfig);
+            return;
+        }
+
+        // Validate filename extension
+        if (!fileName.toLowerCase().endsWith(".md")) {
+            toast.error("File name must end with .md extension.", toastConfig);
             return;
         }
 
@@ -111,7 +107,6 @@ export default function ContributionForm() {
         const toastId = toast.loading("Processing upload configurations pipeline...", toastConfig);
 
         try {
-            let finalMdFileName = fileName || `${title.toLowerCase().replace(/[^a-z0-9]/g, "-")}.md`;
             let uploadTargetBlob: Blob | File;
 
             // Prepare payload data depending on chosen interface workspace tab
@@ -125,7 +120,7 @@ export default function ContributionForm() {
             const awsResponse = await fetch(AWS_LAMBDA_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ filename: finalMdFileName })
+                body: JSON.stringify({ filename: fileName.trim() })
             });
             const awsData = await awsResponse.json();
 
@@ -157,7 +152,7 @@ export default function ContributionForm() {
                     mdFileName: cleanedName,
                     title: title.trim(),
                     description: desc.trim(),
-                    typeOfGuide: submissionType === "upload" ? "SCAFFOLD" : "CONFIG",
+                    typeOfGuide: guideType.toUpperCase(),
                     categoryOfGuide: category,
                     mdFileUrl: fileUrl
                 })
@@ -176,10 +171,10 @@ export default function ContributionForm() {
             setTitle("");
             setDesc("");
             setCategory("");
+            setGuideType("");
             setFileName("");
             setUploadedFile(null);
             setEditorValue("");
-            setTags(["Vite", "React", "TypeScript"]);
 
         } catch (err: any) {
             toast.error(err.message || "Contribution sequence pipeline aborted.", { ...toastConfig, id: toastId });
@@ -193,24 +188,24 @@ export default function ContributionForm() {
             className="w-full bg-zinc-50/50 dark:bg-[#0d0d0f]/60 backdrop-blur-md border border-zinc-200 dark:border-zinc-900 
             rounded-2xl p-6 md:p-8 shadow-xl dark:shadow-2xl transition-all"
         >
-            <form onSubmit={handleSubmit} className="space-y-6">
-                {/* form fields */}
+            <form
+                onSubmit={handleSubmit}
+                className="space-y-6"
+            >
+                {/* Form fields component with category and category type state handlers */}
                 <FormFields
                     category={category}
+                    setCategory={setCategory}
+                    guideType={guideType}
+                    setGuideType={setGuideType}
                     desc={desc}
+                    setDesc={setDesc}
                     fileInputRef={fileInputRef}
                     fileName={fileName}
-                    handleAddTag={handleAddTag}
-                    handleFileChange={handleFileChange}
-                    setCategory={setCategory}
-                    setDesc={setDesc}
                     setFileName={setFileName}
-                    setTagInput={setTagInput}
-                    setTags={setTags}
-                    setTitle={setTitle}
-                    tagInput={tagInput}
-                    tags={tags}
+                    handleFileChange={handleFileChange}
                     title={title}
+                    setTitle={setTitle}
                 />
 
                 {/* File Workspace Component Tab Controllers */}
