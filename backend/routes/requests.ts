@@ -100,15 +100,17 @@ router.get('/my-requests', requireAuth, async (req: Request, res: Response, next
     }
 });
 
-// Get ALL requests
+// Get ALL non-completed requests (status NOT equal to Completed)
 router.get('/all', requireAuth, async (_req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
-        const allRequests = await RequestModel.find().sort({ createdAt: -1 });
+        const uncompletedRequests = await RequestModel.find({
+            status: { $ne: 'Completed' }
+        }).sort({ createdAt: -1 });
 
         return res.status(200).json({
             success: true,
-            count: allRequests.length,
-            data: allRequests
+            count: uncompletedRequests.length,
+            data: uncompletedRequests
         });
     } catch (error) {
         next(error);
@@ -121,7 +123,7 @@ router.patch('/update/:id', requireAuth, async (req: Request, res: Response, nex
         const { id } = req.params;
         const { status, reason } = req.body;
 
-        const validStatuses = ['Pending', 'In progress', 'Rejected'];
+        const validStatuses = ['Pending', 'In progress', 'Completed', 'Rejected'];
 
         if (!status || !validStatuses.includes(status)) {
             return res.status(400).json({
@@ -133,7 +135,9 @@ router.patch('/update/:id', requireAuth, async (req: Request, res: Response, nex
         let statusReason = reason?.trim();
 
         if (!statusReason) {
-            if (status === 'In progress') {
+            if (status === 'Completed') {
+                statusReason = 'Great news! Your requested guide setup has been completed and published.';
+            } else if (status === 'In progress') {
                 statusReason = 'Yes, your guide is currently in work!';
             } else if (status === 'Pending') {
                 statusReason = 'Your request has been received and has not been worked on yet.';
@@ -168,7 +172,7 @@ router.patch('/update/:id', requireAuth, async (req: Request, res: Response, nex
 
     <div style="background-color: #f4f4f5; padding: 16px; border-radius: 8px; margin: 16px 0;">
         <p style="margin: 0 0 8px 0;"><strong>Request ID:</strong> ${updatedRequest.requestId}</p>
-        <p style="margin: 0 0 8px 0;"><strong>New Status:</strong> <span style="color: #7c3aed; font-weight: bold;">${status}</span></p>
+        <p style="margin: 0 0 8px 0;"><strong>New Status:</strong> <span style="color: #10B981; font-weight: bold;">${status}</span></p>
         <p style="margin: 0;"><strong>Update Note:</strong> ${statusReason}</p>
     </div>
 
