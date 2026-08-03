@@ -50,7 +50,11 @@ export default function ScrollingRequests({ TICKER_ROW_1, TICKER_ROW_2, getStatu
                                     ))}
                                 </div>
 
-                                <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border ${getStatusStyles(req.status)}`}>{req.status}</span>
+                                <span
+                                    className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border ${getStatusStyles(req.status)}`}
+                                >
+                                    {req.status}
+                                </span>
                             </div>
                         </div>
                     ))}
@@ -81,7 +85,11 @@ export default function ScrollingRequests({ TICKER_ROW_1, TICKER_ROW_2, getStatu
                                     ))}
                                 </div>
 
-                                <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border ${getStatusStyles(req.status)}`}>{req.status}</span>
+                                <span
+                                    className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border ${getStatusStyles(req.status)}`}
+                                >
+                                    {req.status}
+                                </span>
                             </div>
                         </div>
                     ))}

@@ -115,11 +115,16 @@ export default function FormFields({
                     Category
                 </label>
 
-                <div className="relative w-full flex items-center bg-white dark:bg-[#070708] rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm transition-colors duration-150 focus-within:border-zinc-400 dark:focus-within:border-zinc-700 group cursor-pointer overflow-hidden">
+                <div
+                    className="relative w-full flex items-center bg-white dark:bg-[#070708] rounded-xl border border-zinc-200 
+                    dark:border-zinc-800 shadow-sm transition-colors duration-150 focus-within:border-zinc-400 
+                    dark:focus-within:border-zinc-700 group cursor-pointer overflow-hidden"
+                >
                     <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className={`w-full bg-transparent p-4 pr-12 text-sm focus:outline-none cursor-pointer appearance-none select-none relative z-10 transition-colors
+                        className={`w-full bg-transparent p-4 pr-12 text-sm focus:outline-none cursor-pointer appearance-none select-none 
+                        relative z-10 transition-colors
                             ${!category
                                 ? "text-zinc-400 dark:text-zinc-500"
                                 : "text-zinc-900 dark:text-white font-medium"
@@ -167,7 +172,8 @@ export default function FormFields({
                     <select
                         value={guideType}
                         onChange={(e) => setGuideType(e.target.value)}
-                        className={`w-full bg-transparent p-4 pr-12 text-sm focus:outline-none cursor-pointer appearance-none select-none relative z-10 transition-colors
+                        className={`w-full bg-transparent p-4 pr-12 text-sm focus:outline-none cursor-pointer appearance-none select-none 
+                        relative z-10 transition-colors
                             ${!guideType
                                 ? "text-zinc-400 dark:text-zinc-500"
                                 : "text-zinc-900 dark:text-white font-medium"

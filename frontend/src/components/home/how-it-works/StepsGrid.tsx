@@ -7,7 +7,7 @@ import { FaCodeCommit } from "react-icons/fa6";
 // steps grid component
 export default function StepsGrid({ stacks }: { stacks: string[] }) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 mt-20 gap-x-10 gap-y-16 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 mt-20 gap-x-10 gap-y-16 w-full">
             {/* Step 01: Browse the catalog */}
             <div className="flex flex-col justify-start items-start w-full group px-2">
                 <div className="w-full flex items-center gap-4 mb-6 select-none">
@@ -49,7 +49,8 @@ export default function StepsGrid({ stacks }: { stacks: string[] }) {
                             >
                                 <h4
                                     className={`text-[10px] tracking-wider font-bold 
-                                    ${isDocker ? "text-emerald-600 dark:text-[#4ade80]"
+                                    ${isDocker
+                                            ? "text-emerald-600 dark:text-[#4ade80]"
                                             : "text-zinc-500 dark:text-zinc-400"
                                         }`}
                                 >

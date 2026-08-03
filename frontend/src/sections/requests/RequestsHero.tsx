@@ -45,7 +45,7 @@ export const getStatusStyles = (status: RequestItem["status"]) => {
 export default function RequestsHero() {
     return (
         <div
-            className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white py-24 min-h-screen 
+            className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white py-16 sm:py-24 min-h-screen 
             flex flex-col items-center justify-start transition-colors duration-300"
         >
             {/* Dot Grid Layer */}

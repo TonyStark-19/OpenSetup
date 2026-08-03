@@ -12,7 +12,7 @@ const stats = [
 export default function Stats() {
     return (
         <div
-            className="flex flex-row justify-center items-center gap-6 md:gap-14 border-t border-zinc-200 
+            className="flex flex-row flex-wrap justify-center items-center gap-6 md:gap-14 border-t border-zinc-200 
             dark:border-[#262629]/60 py-6 mt-16 max-w-4xl w-[90%] px-4 z-10 select-none transition-colors duration-300"
         >
             {stats.map((stat, idx) => (

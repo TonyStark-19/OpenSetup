@@ -16,10 +16,10 @@ interface ActionBarProps {
 export default function ActionBar({ MOCK_METADATA, handleUpvote, upvoted, upvoteCount }: ActionBarProps) {
     return (
         <div
-            className="bg-zinc-50/50 dark:bg-[#121215]/50 border-t border-zinc-200 dark:border-[#212124] px-6 py-4 flex 
-            flex-col sm:flex-row sm:items-center sm:justify-between gap-4 select-none transition-colors duration-300"
+            className="bg-zinc-50/50 dark:bg-[#121215]/50 border-t border-zinc-200 dark:border-[#212124] px-4 sm:px-6 py-4 flex 
+            flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 select-none transition-colors duration-300"
         >
-            <div className="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-[#888a8e]">
+            <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-[#888a8e] flex-wrap">
                 <div
                     className="w-5 h-5 rounded-full bg-zinc-100 dark:bg-[#1c1c21] border border-zinc-200 dark:border-[#313135] 
                     overflow-hidden flex items-center justify-center shrink-0 transition-colors"
@@ -40,15 +40,15 @@ export default function ActionBar({ MOCK_METADATA, handleUpvote, upvoted, upvote
                     )}
                 </div>
 
-                <span>
+                <span className="truncate max-w-45 sm:max-w-xs">
                     Contributed by <span className="text-zinc-900 dark:text-white font-medium hover:underline cursor-pointer">@{MOCK_METADATA.contributor}</span>
                 </span>
 
-                <span className="text-zinc-300 dark:text-[#3a3a3e]">·</span>
-                <span>Verified {MOCK_METADATA.verifiedDate}</span>
+                <span className="text-zinc-300 dark:text-[#3a3a3e] hidden sm:inline">·</span>
+                <span className="w-full sm:w-auto pt-0.5 sm:pt-0">Verified {MOCK_METADATA.verifiedDate}</span>
             </div>
 
-            <div className="flex items-center gap-2.5 self-end sm:self-auto">
+            <div className="flex items-center gap-2 w-full sm:w-auto justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-zinc-200/60 dark:border-zinc-800/60">
                 <button
                     className="flex items-center gap-1.5 bg-white dark:bg-[#121214] hover:bg-zinc-50 dark:hover:bg-[#1c1c21] 
                     border border-zinc-200 dark:border-[#212124] hover:border-zinc-300 dark:hover:border-[#313135] 

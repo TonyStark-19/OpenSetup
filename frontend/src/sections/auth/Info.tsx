@@ -11,6 +11,7 @@ interface Feature {
     description: string;
 }
 
+// info props
 interface InfoProps {
     features: Feature[];
 }

@@ -31,7 +31,7 @@ export default function Actions() {
                     <button
                         className="flex items-center justify-center gap-2 bg-zinc-900 dark:bg-[#EDEEF0] text-white dark:text-[#0a0a0a] 
                         px-7 py-3.5 rounded-lg text-sm font-semibold hover:bg-zinc-800 dark:hover:bg-white active:scale-[0.98] 
-                        transition-all duration-200 group cursor-pointer shadow-md dark:shadow-lg dark:shadow-black/20"
+                        transition-all duration-200 group cursor-pointer shadow-md dark:shadow-lg dark:shadow-black/20 max-sm:w-full"
                     >
                         Request a Guide
                         <FaArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-200" />
@@ -43,7 +43,7 @@ export default function Actions() {
                         className="flex items-center justify-center bg-zinc-50 dark:bg-transparent text-zinc-800 dark:text-[#EDEEF0] 
                         border border-zinc-200 dark:border-zinc-800/80 px-7 py-3.5 rounded-lg text-sm font-semibold hover:bg-zinc-100 
                         dark:hover:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 active:scale-[0.98] transition-all 
-                        duration-200 cursor-pointer backdrop-blur-sm shadow-sm dark:shadow-none"
+                        duration-200 cursor-pointer backdrop-blur-sm shadow-sm dark:shadow-none max-sm:w-full"
                     >
                         Browse Guides
                     </button>

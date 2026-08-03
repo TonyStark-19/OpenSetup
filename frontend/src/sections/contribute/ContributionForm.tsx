@@ -17,10 +17,10 @@ import EditorModal from "../../components/contribute/form/EditorModal";
 import UploadTabs from "../../components/contribute/form/UploadTabs";
 
 // backend url
-const BACKEND_URL = "http://localhost:5000/api/guides/contribute";
+const BACKEND_URL = import.meta.env.VITE_BASE_URL;
 
 // aws url
-const AWS_LAMBDA_URL = "https://p73dtulw63.execute-api.ap-south-1.amazonaws.com/get-upload-url";
+const AWS_LAMBDA_URL = import.meta.env.VITE_AWS_LAMBDA_URL;
 
 // toast config
 const toastConfig = {
@@ -142,7 +142,7 @@ export default function ContributionForm() {
             }
 
             // 4. Step Three: Commit configuration indexing parameters record inside database collection tracking
-            const backendResponse = await fetch(BACKEND_URL, {
+            const backendResponse = await fetch(`${BACKEND_URL}/api/guides/contribute`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

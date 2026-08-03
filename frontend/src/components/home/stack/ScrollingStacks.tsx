@@ -34,13 +34,13 @@ export default function ScrollingStacks({ firstRow, secondRow }: ScrollingStacks
                             <img
                                 src={`/stacks/${stack.icon}`}
                                 alt={`${stack.name} icon`}
-                                className="w-7 h-7 object-contain opacity-90 dark:opacity-80 transition-opacity"
+                                className="w-5 h-5 sm:w-7 sm:h-7 object-contain opacity-90 dark:opacity-80 transition-opacity"
                                 onError={(e) => {
                                     (e.target as HTMLElement).style.display = 'none';
                                 }}
                             />
 
-                            <span className="text-zinc-700 dark:text-[#b5b7ba] font-medium text-[14px] tracking-tight transition-colors">
+                            <span className="text-zinc-700 dark:text-[#b5b7ba] font-medium text-xs sm:text-[14px] tracking-tight transition-colors">
                                 {stack.name}
                             </span>
                         </div>
@@ -60,13 +60,13 @@ export default function ScrollingStacks({ firstRow, secondRow }: ScrollingStacks
                             <img
                                 src={`/stacks/${stack.icon}`}
                                 alt={`${stack.name} icon`}
-                                className="w-7 h-7 object-contain opacity-90 dark:opacity-80 transition-opacity"
+                                className="w-5 h-5 sm:w-7 sm:h-7 object-contain opacity-90 dark:opacity-80 transition-opacity"
                                 onError={(e) => {
                                     (e.target as HTMLElement).style.display = 'none';
                                 }}
                             />
 
-                            <span className="text-zinc-700 dark:text-[#b5b7ba] font-medium text-[14px] tracking-tight transition-colors">
+                            <span className="text-zinc-700 dark:text-[#b5b7ba] font-medium text-xs sm:text-[14px] tracking-tight transition-colors">
                                 {stack.name}
                             </span>
                         </div>

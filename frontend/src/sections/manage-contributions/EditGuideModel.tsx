@@ -39,7 +39,10 @@ export default function EditGuideModel({ editingGuide, setEditingGuide, handleUp
                 </div>
 
                 {/* Modal Form */}
-                <form onSubmit={handleUpdateGuide} className="space-y-4">
+                <form
+                    onSubmit={handleUpdateGuide}
+                    className="space-y-4"
+                >
                     {/* File Name */}
                     <div className="flex flex-col gap-1.5">
                         <label className="text-[10px] font-mono font-bold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
@@ -110,7 +113,11 @@ export default function EditGuideModel({ editingGuide, setEditingGuide, handleUp
                                     appearance-none cursor-pointer relative z-10"
                                 >
                                     {categories.map((cat) => (
-                                        <option key={cat} value={cat} className="bg-white dark:bg-[#121214] text-zinc-800 dark:text-zinc-200">
+                                        <option
+                                            key={cat}
+                                            value={cat}
+                                            className="bg-white dark:bg-[#121214] text-zinc-800 dark:text-zinc-200"
+                                        >
                                             {cat.charAt(0).toUpperCase() + cat.slice(1)}
                                         </option>
                                     ))}
@@ -137,7 +144,11 @@ export default function EditGuideModel({ editingGuide, setEditingGuide, handleUp
                                     appearance-none cursor-pointer relative z-10 font-mono"
                                 >
                                     {guideTypes.map((gt) => (
-                                        <option key={gt} value={gt} className="bg-white dark:bg-[#121214] text-zinc-800 dark:text-zinc-200">
+                                        <option
+                                            key={gt}
+                                            value={gt}
+                                            className="bg-white dark:bg-[#121214] text-zinc-800 dark:text-zinc-200"
+                                        >
                                             {gt}
                                         </option>
                                     ))}

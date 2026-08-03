@@ -16,6 +16,9 @@ interface RequestListProps {
     setMyRequests: React.Dispatch<React.SetStateAction<RequestItem[]>>;
 }
 
+// base url
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 // request list component
 export default function RequestList({ myRequests, setMyRequests }: RequestListProps) {
     const [loading, setLoading] = useState(true);
@@ -25,7 +28,7 @@ export default function RequestList({ myRequests, setMyRequests }: RequestListPr
         const fetchMyRequests = async () => {
             try {
                 const token = localStorage.getItem("authToken");
-                const response = await fetch("http://localhost:5000/api/requests/my-requests", {
+                const response = await fetch(`${BASE_URL}/api/requests/my-requests`, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`,
@@ -122,7 +125,9 @@ export default function RequestList({ myRequests, setMyRequests }: RequestListPr
                                     <span>#{req.id.split("_")[2] || req.id.slice(-5)}</span>
                                 </div>
 
-                                <span className={`text-xs font-mono font-bold px-3 py-1 rounded-lg border shadow-sm dark:shadow-none ${getStatusStyles(req.status)}`}>
+                                <span
+                                    className={`text-xs font-mono font-bold px-3 py-1 rounded-lg border shadow-sm dark:shadow-none ${getStatusStyles(req.status)}`}
+                                >
                                     {req.status}
                                 </span>
                             </div>

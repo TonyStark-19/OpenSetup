@@ -56,7 +56,7 @@ export default function BrowseGuideHeader({
             {/* FILTER SUB-SYSTEM ACTIONS BAR */}
             <div
                 className="w-full border-b border-zinc-200 dark:border-zinc-900 pb-4 mb-8 flex flex-col 
-                lg:flex-row lg:items-center justify-between gap-6 select-none relative z-30"
+                xl:flex-row xl:items-center justify-between gap-6 select-none relative z-30"
             >
                 {/* Horizontal Categories Nav Rail */}
                 <div className="flex items-center gap-1 overflow-x-auto whitespace-nowrap scrollbar-none py-1">

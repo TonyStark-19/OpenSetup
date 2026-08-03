@@ -55,6 +55,9 @@ const toastConfig = {
     error: { iconTheme: { primary: "#EF4444", secondary: "#ffffff" } },
 };
 
+// base url
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 // guide detail page
 export default function GuideDetailPage({ data: propData }: GuideDetailPageProps) {
     // Read dynamic slug parameter from URL (/guides/:slug)
@@ -102,7 +105,7 @@ export default function GuideDetailPage({ data: propData }: GuideDetailPageProps
 
         const recordView = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/guides/${guideData.id}/view`, {
+                const response = await fetch(`${BASE_URL}/api/guides/${guideData.id}/view`, {
                     method: "PATCH",
                     headers: { "Content-Type": "application/json" }
                 });
@@ -187,7 +190,7 @@ export default function GuideDetailPage({ data: propData }: GuideDetailPageProps
         setHasUpvoted(true);
 
         try {
-            const response = await fetch(`http://localhost:5000/api/guides/${guideData.id}/upvote`, {
+            const response = await fetch(`${BASE_URL}/api/guides/${guideData.id}/upvote`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

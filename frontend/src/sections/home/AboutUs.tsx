@@ -29,7 +29,7 @@ export default function AboutUs() {
 
     return (
         <div
-            className="relative flex flex-col justify-center items-center py-24 bg-white dark:bg-[#0a0a0a] overflow-hidden 
+            className="relative flex flex-col justify-center items-center py-16 sm:py-24 bg-white dark:bg-[#0a0a0a] overflow-hidden 
             px-6 md:px-16 lg:px-24 w-full transition-colors duration-300"
         >
             {/* Sync structured container width layout */}
@@ -37,7 +37,7 @@ export default function AboutUs() {
                 {/* about header */}
                 <AboutHeader />
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-4 w-full items-stretch">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:mt-4 w-full items-stretch">
                     {/* Left structural element wrapper */}
                     <div className="lg:col-span-4 flex">
                         <LeftCard />

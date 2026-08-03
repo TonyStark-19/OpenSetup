@@ -4,7 +4,7 @@ import { IoMdWifi } from "react-icons/io";
 // about header component
 export default function AboutHeader() {
     return (
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-8">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center w-full gap-8">
             <div className="flex flex-col justify-start items-start max-w-3xl">
                 <h3 className="text-zinc-400 dark:text-[#525256] text-[11px] uppercase font-bold font-mono tracking-widest transition-colors">
                     About OpenSetup
@@ -22,7 +22,7 @@ export default function AboutHeader() {
 
             {/* Premium Dynamic Status Card */}
             <div
-                className="flex flex-col justify-between items-start p-6 h-48 w-full md:w-80 border border-zinc-200 
+                className="flex flex-col justify-between items-start p-6 h-48 w-full lg:w-80 border border-zinc-200 
                 dark:border-[#212124] relative bg-linear-to-br from-zinc-50 via-white to-zinc-100 dark:from-[#241816] 
                 dark:via-[#121214] dark:to-[#0b0b0d] shadow-sm dark:shadow-none transition-all duration-300"
             >

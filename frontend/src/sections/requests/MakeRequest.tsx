@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import RequestForm from "../../components/request/make-request/RequestForm";
 import RequestList from "../../components/request/make-request/RequestList";
 
-const BACKEND_URL = "http://localhost:5000/api/requests";
+const BACKEND_URL = import.meta.env.VITE_BASE_URL;
 
 // Dynamic theme-aware configuration options for react-hot-toast
 const toastConfig = {
@@ -79,7 +79,7 @@ export default function MakeRequest() {
         const toastId = toast.loading("Submitting blueprint request...", toastConfig);
 
         try {
-            const response = await fetch(BACKEND_URL, {
+            const response = await fetch(`${BACKEND_URL}/api/requests`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

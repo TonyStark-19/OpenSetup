@@ -31,7 +31,7 @@ export interface ContributedGuide {
 }
 
 // Backend configuration URL
-const BACKEND_URL = "http://localhost:5000/api/guides";
+const BACKEND_URL = import.meta.env.VITE_BASE_URL;
 
 // Toast Notification Config
 const toastConfig = {
@@ -66,7 +66,7 @@ export default function ManageContributionsPage() {
         const token = localStorage.getItem("authToken");
 
         try {
-            const response = await fetch(`${BACKEND_URL}/pending`, {
+            const response = await fetch(`${BACKEND_URL}/api/guides/pending`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -105,7 +105,7 @@ export default function ManageContributionsPage() {
         const toastId = toast.loading("Updating guide configuration record...", toastConfig);
 
         try {
-            const response = await fetch(`${BACKEND_URL}/update/${editingGuide._id}`, {
+            const response = await fetch(`${BACKEND_URL}/api/guides/update/${editingGuide._id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

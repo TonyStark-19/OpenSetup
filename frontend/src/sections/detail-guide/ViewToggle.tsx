@@ -1,9 +1,7 @@
 // view toggle props
 interface ViewToggleProps {
     viewMode: "preview" | "raw";
-    setViewMode: React.Dispatch<
-        React.SetStateAction<"preview" | "raw">
-    >;
+    setViewMode: React.Dispatch<React.SetStateAction<"preview" | "raw">>;
 }
 
 // view toggle component

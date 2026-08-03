@@ -27,7 +27,7 @@ export interface SetupRequest {
 }
 
 // API endpoint configuration
-const BACKEND_URL = "http://localhost:5000/api/requests";
+const BACKEND_URL = import.meta.env.VITE_BASE_URL;
 
 // Toast Notification Config
 const toastConfig = {
@@ -60,7 +60,7 @@ export default function ManageRequestsPage() {
         const token = localStorage.getItem("authToken");
 
         try {
-            const response = await fetch(`${BACKEND_URL}/all`, {
+            const response = await fetch(`${BACKEND_URL}/api/requests/all`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -112,7 +112,7 @@ export default function ManageRequestsPage() {
         const toastId = toast.loading("Updating status & notifying user...", toastConfig);
 
         try {
-            const response = await fetch(`${BACKEND_URL}/update/${selectedRequest._id}`, {
+            const response = await fetch(`${BACKEND_URL}/api/requests/update/${selectedRequest._id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

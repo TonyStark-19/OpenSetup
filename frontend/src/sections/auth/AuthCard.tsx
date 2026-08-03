@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 // backend url
-const BACKEND_URL = "http://localhost:5000/auth";
+const BACKEND_URL = import.meta.env.VITE_BASE_URL;
 
 // auth card component
 export default function AuthCard() {
@@ -78,7 +78,7 @@ export default function AuthCard() {
                 ? { email, password, name: email.split("@")[0] }
                 : { email, password };
 
-            const response = await fetch(`${BACKEND_URL}${endpoint}`, {
+            const response = await fetch(`${BACKEND_URL}/auth${endpoint}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -121,7 +121,7 @@ export default function AuthCard() {
     // Handle Google OAuth initialization 
     const handleGoogleAuth = () => {
         // Redirect directly onto the backend gateway passport framework
-        window.location.href = `${BACKEND_URL}/google`;
+        window.location.href = `${BACKEND_URL}/auth/google`;
     };
 
     return (
@@ -246,7 +246,7 @@ export default function AuthCard() {
                 </form>
 
                 {/* Subtext Context Mode Switch Toggle */}
-                <p className="text-xs text-zinc-500 dark:text-[#888a8e] mt-6 select-none">
+                <p className="text-xs text-zinc-500 dark:text-[#888a8e] mt-6 select-none text-center">
                     {mode === "login" ? "New to the platform?" : "Already configured a profile?"}{" "}
 
                     <button

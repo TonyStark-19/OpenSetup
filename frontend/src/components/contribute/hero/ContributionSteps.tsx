@@ -13,7 +13,7 @@ export default function ContributionSteps({ mainSteps }: { mainSteps: MainStepsP
             </h4>
 
             {/* Step Pipeline Tracking Layout */}
-            <div className="relative w-full grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 lg:gap-6">
+            <div className="relative w-full grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-4 lg:gap-6">
                 {/* Horizontal connection line layout for desktop viewports */}
                 <div
                     className="hidden md:block absolute top-10 left-[10%] right-[10%] h-0.5 border-t border-dashed border-zinc-200 

@@ -26,7 +26,7 @@ export interface PopularGuidesGridProps {
 }
 
 // backend url
-const BACKEND_URL = "http://localhost:5000/api/guides/top";
+const BACKEND_URL = import.meta.env.VITE_BASE_URL;
 
 // popular guides
 export default function PopularGuides() {
@@ -37,7 +37,7 @@ export default function PopularGuides() {
     useEffect(() => {
         const fetchTopGuides = async () => {
             try {
-                const response = await fetch(BACKEND_URL);
+                const response = await fetch(`${BACKEND_URL}/api/guides/top`);
                 const resData = await response.json();
 
                 if (response.ok && resData.success) {
@@ -73,8 +73,8 @@ export default function PopularGuides() {
 
     return (
         <div
-            className="relative flex flex-col justify-center items-center py-24 bg-white dark:bg-[#0a0a0a] border-t border-zinc-200 dark:border-zinc-900
-            overflow-hidden px-6 md:px-16 lg:px-24 w-full transition-colors duration-300"
+            className="relative flex flex-col justify-center items-center py-16 sm:py-24 bg-white dark:bg-[#0a0a0a] border-t 
+            border-zinc-200 dark:border-zinc-900 overflow-hidden px-6 md:px-16 lg:px-24 w-full transition-colors duration-300"
         >
             <div className="w-full max-w-7xl flex flex-col gap-12">
                 {/* Header Section */}

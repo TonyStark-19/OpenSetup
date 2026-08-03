@@ -112,8 +112,12 @@ export default function RightCard({ codeString, handleCopy, copied, stacks }: Ri
                     <div className="flex flex-col">
                         <div className="flex flex-row justify-between items-center gap-2">
                             <h3 className="text-zinc-900 dark:text-[#EDEEF0] text-lg font-semibold transition-colors">Copy-Paste Ready</h3>
-                            <IoMdArrowForward size={18} className="text-zinc-300 dark:text-[#1d2329] group-hover:text-zinc-900 
-                            dark:group-hover:text-[#EDEEF0] group-hover:translate-x-0.5 transition-all duration-200" />
+
+                            <IoMdArrowForward
+                                size={18}
+                                className="text-zinc-300 dark:text-[#1d2329] group-hover:text-zinc-900 
+                                dark:group-hover:text-[#EDEEF0] group-hover:translate-x-0.5 transition-all duration-200"
+                            />
                         </div>
 
                         <p className="text-zinc-500 dark:text-[#888a8e] text-[13px] leading-relaxed mt-2.5 transition-colors">

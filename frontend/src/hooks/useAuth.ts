@@ -17,6 +17,7 @@ export function useAuth() {
         return () => window.removeEventListener("storage", checkAuth);
     }, []);
 
+    // Logout function to clear auth token and update state
     const logout = () => {
         localStorage.removeItem("authToken");
         setIsLoggedIn(false);

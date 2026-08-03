@@ -43,7 +43,10 @@ export default function RequestModel(
                 </div>
 
                 {/* Modal Form */}
-                <form onSubmit={handleUpdateStatus} className="space-y-4">
+                <form
+                    onSubmit={handleUpdateStatus}
+                    className="space-y-4"
+                >
                     {/* Request Info Box */}
                     <div className="p-3 rounded-xl bg-zinc-50 dark:bg-[#070708] border border-zinc-200 dark:border-zinc-800/80 text-xs">
                         <p className="font-semibold text-zinc-900 dark:text-white mb-0.5">{selectedRequest.title}</p>

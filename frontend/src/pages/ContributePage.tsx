@@ -25,7 +25,7 @@ export default function ContributePage() {
 
             <div
                 className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white flex flex-col items-center 
-                justify-start transition-colors duration-300 pb-24"
+                justify-start transition-colors duration-300 pb-16 sm:pb-24"
             >
                 {/* hero section */}
                 <ContributeHero />

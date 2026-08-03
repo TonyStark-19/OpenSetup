@@ -31,8 +31,8 @@ export interface GuideCardData {
     profileImage: string;
 }
 
-// backend url
-const BACKEND_URL = "http://localhost:5000/api/guides";
+// base url
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 // Helper map utility linking guide type values to design tokens
 export const getIconConfig = (typeOfGuide: string) => {
@@ -93,7 +93,7 @@ export default function BrowseGuidesPage() {
     useEffect(() => {
         const fetchAllGuides = async () => {
             try {
-                const response = await fetch(BACKEND_URL);
+                const response = await fetch(`${BASE_URL}/api/guides`);
                 const resData = await response.json();
 
                 if (response.ok && resData.success) {
@@ -165,7 +165,7 @@ export default function BrowseGuidesPage() {
 
             {/* main content */}
             <div
-                className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white py-24 min-h-screen 
+                className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white py-16 sm:py-24 min-h-screen 
                 flex flex-col items-center justify-start transition-colors duration-300"
             >
                 <div className="w-full max-w-7xl px-4 md:px-8 flex flex-col items-start justify-start">

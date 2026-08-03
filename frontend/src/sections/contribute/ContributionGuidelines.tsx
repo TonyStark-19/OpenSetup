@@ -1,6 +1,7 @@
 // import icons 
 import { Code2, Clock, AlertTriangle, CheckCircle, FileText, Sparkles } from "lucide-react";
 
+// rules data
 const rules = [
     {
         icon: <AlertTriangle size={14} className="text-zinc-500" />,

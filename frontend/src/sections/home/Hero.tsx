@@ -8,7 +8,7 @@ export default function Hero() {
     return (
         <div
             className="relative bg-white dark:bg-[#0a0a0a] flex flex-col justify-center items-center min-h-screen 
-            overflow-hidden px-4 transition-colors duration-300 pb-10"
+            overflow-hidden px-4 transition-colors duration-300 sm:pb-10"
         >
             {/* LIGHT THEME GLOW LAYER (Yellow/Amber Subtle Blend) */}
             <div
@@ -39,7 +39,7 @@ export default function Hero() {
             <Content />
 
             {/* setup guide panel wrapper targeting internal layouts */}
-            <div className="w-full max-w-7xl relative z-20 px-2 mt-4">
+            <div className="w-full max-w-7xl relative z-20 px-2 sm:mt-4">
                 <GuidePanel />
             </div>
         </div>
