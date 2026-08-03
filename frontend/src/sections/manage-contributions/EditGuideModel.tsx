@@ -1,5 +1,8 @@
+// import useState and useEffect
+import { useState } from "react";
+
 // import icons
-import { X, Save, ChevronDown } from "lucide-react";
+import { X, Save, ChevronDown, AlertCircle } from "lucide-react";
 
 // import type
 import type { ContributedGuide } from "../../pages/ManageContributionsPage";
@@ -8,7 +11,7 @@ import type { ContributedGuide } from "../../pages/ManageContributionsPage";
 interface EditGuideModelProps {
     editingGuide: ContributedGuide;
     setEditingGuide: React.Dispatch<React.SetStateAction<ContributedGuide | null>>;
-    handleUpdateGuide: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+    handleUpdateGuide: (e: React.FormEvent<HTMLFormElement>, rejectionReason?: string) => Promise<void>;
     categories: string[];
     guideTypes: string[];
     isSaving: boolean;
@@ -16,6 +19,13 @@ interface EditGuideModelProps {
 
 // edit guide model component
 export default function EditGuideModel({ editingGuide, setEditingGuide, handleUpdateGuide, categories, guideTypes, isSaving }: EditGuideModelProps) {
+    const [rejectionReason, setRejectionReason] = useState<string>("");
+
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        handleUpdateGuide(e, editingGuide.status === "REJECTED" ? rejectionReason : undefined);
+    };
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
             <div
@@ -40,7 +50,7 @@ export default function EditGuideModel({ editingGuide, setEditingGuide, handleUp
 
                 {/* Modal Form */}
                 <form
-                    onSubmit={handleUpdateGuide}
+                    onSubmit={onSubmit}
                     className="space-y-4"
                 >
                     {/* File Name */}
@@ -186,6 +196,25 @@ export default function EditGuideModel({ editingGuide, setEditingGuide, handleUp
                             ))}
                         </div>
                     </div>
+
+                    {/* Rejection Reason Input Field (Visible only when REJECTED is selected) */}
+                    {editingGuide.status === "REJECTED" && (
+                        <div className="flex flex-col gap-1.5 animate-fade-in">
+                            <label className="text-[10px] font-mono font-bold uppercase tracking-wide text-red-500 dark:text-red-400 flex items-center gap-1">
+                                <AlertCircle size={11} /> Rejection Reason (Required)
+                            </label>
+
+                            <textarea
+                                value={rejectionReason}
+                                onChange={(e) => setRejectionReason(e.target.value)}
+                                placeholder="Specify why this guide contribution was rejected..."
+                                rows={3}
+                                className="w-full bg-zinc-50 dark:bg-[#070708] border border-red-200 dark:border-red-900/40 
+                                rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 dark:text-white focus:outline-none focus:border-red-400 resize-none font-sans"
+                                required
+                            />
+                        </div>
+                    )}
 
                     {/* Form Actions */}
                     <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800 mt-6">

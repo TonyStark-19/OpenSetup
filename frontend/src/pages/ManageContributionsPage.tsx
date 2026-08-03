@@ -91,9 +91,15 @@ export default function ManageContributionsPage() {
     }, []);
 
     // Commit Metadata Updates & Verification Toggle to Backend
-    const handleUpdateGuide = async (e: React.FormEvent) => {
+    const handleUpdateGuide = async (e: React.FormEvent<HTMLFormElement>, rejectionReason?: string) => {
         e.preventDefault();
         if (!editingGuide) return;
+
+        // Validation for Rejection reason
+        if (editingGuide.status === "REJECTED" && (!rejectionReason || !rejectionReason.trim())) {
+            toast.error("A rejection reason must be provided before rejecting.", toastConfig);
+            return;
+        }
 
         const token = localStorage.getItem("authToken");
         if (!token) {
@@ -117,7 +123,8 @@ export default function ManageContributionsPage() {
                     description: editingGuide.description,
                     typeOfGuide: editingGuide.typeOfGuide,
                     categoryOfGuide: editingGuide.categoryOfGuide,
-                    status: editingGuide.status
+                    status: editingGuide.status,
+                    reason: rejectionReason?.trim()
                 })
             });
 
@@ -127,7 +134,9 @@ export default function ManageContributionsPage() {
                 toast.success(
                     editingGuide.status === "VERIFIED"
                         ? "Guide verified & live email alert dispatched!"
-                        : "Guide metadata updated successfully!",
+                        : editingGuide.status === "REJECTED"
+                            ? "Guide rejected, email notice sent, and record deleted!"
+                            : "Guide metadata updated successfully!",
                     { ...toastConfig, id: toastId }
                 );
 

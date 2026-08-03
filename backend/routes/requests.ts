@@ -55,22 +55,32 @@ router.post('/', requireAuth, async (req: Request, res: Response, next: NextFunc
             statusReason: 'Your request has been received and has not been worked on yet.'
         });
 
+        // Pass 2 arguments matching your sendMail signature: (subject, body)
         await sendMail(
             "📝 Setup Request Received",
             `
-    <h2>Setup Request Submitted</h2>
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0a0a0a; color: #ffffff; padding: 40px 20px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
+                <div style="border-bottom: 1px solid #262629; padding-bottom: 20px; margin-bottom: 24px;">
+                    <h2 style="margin: 0; font-size: 20px; font-weight: 600; color: #EDEEF0; letter-spacing: -0.5px;">OpenSetup Workspace</h2>
+                </div>
+                
+                <h3 style="font-size: 16px; font-weight: 600; color: #EDEEF0; margin-top: 0; margin-bottom: 12px;">Setup Request Submitted Successfully</h3>
+                
+                <p style="color: #888a8e; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                    Hi there, your request for <strong style="color: #ffffff;">"${title}"</strong> has been logged into our community moderation queue.
+                </p>
 
-    <p>Hi there,</p>
-    <p>Your request for <strong>"${title}"</strong> (${userEmail}) has been logged into our workspace queue.</p>
-    
-    <p><strong>Request ID:</strong> ${customRequestId}</p>
-    <p><strong>Status:</strong> Pending</p>
-    <p><strong>Status Message:</strong> Your request has been received and has not been worked on yet.</p>
+                <div style="background-color: #121215; border: 1px solid #212124; padding: 20px; border-radius: 12px; margin-bottom: 24px;">
+                    <p style="margin: 0 0 10px 0; font-size: 13px; color: #888a8e;"><strong>Request ID:</strong> <span style="font-family: monospace; color: #EDEEF0;">${customRequestId}</span></p>
+                    <p style="margin: 0 0 10px 0; font-size: 13px; color: #888a8e;"><strong>Status:</strong> <span style="color: #eab308; font-weight: 600; text-transform: uppercase; font-size: 11px; background-color: rgba(234, 179, 8, 0.1); padding: 2px 8px; border-radius: 6px;">Pending</span></p>
+                    <p style="margin: 0; font-size: 13px; color: #888a8e;"><strong>Message:</strong> Your request has been received and has not been worked on yet.</p>
+                </div>
 
-    <hr/>
-
-    <p>We will keep you updated as our team reviews your guide setup request.</p>
-    `
+                <p style="color: #525256; font-size: 12px; margin: 0; border-top: 1px solid #212124; pt-20px;">
+                    Thank you for contributing to OpenSetup! We will keep you updated as our team reviews your setup request.
+                </p>
+            </div>
+            `
         );
 
         return res.status(201).json({
@@ -149,6 +159,59 @@ router.patch('/update/:id', requireAuth, async (req: Request, res: Response, nex
             }
         }
 
+        // If status is Rejected or Completed, find and delete the document directly
+        if (status === 'Rejected' || status === 'Completed') {
+            const targetRequest = await RequestModel.findOneAndDelete({
+                $or: [{ _id: id }, { requestId: id }]
+            });
+
+            if (!targetRequest) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Target request context record not found.'
+                });
+            }
+
+            const isCompleted = status === 'Completed';
+            const statusColor = isCompleted ? '#10B981' : '#EF4444';
+            const statusBg = isCompleted ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)';
+
+            // Send notification email to the user
+            await sendMail(
+                `📋 Setup Request Update: ${targetRequest.title}`,
+                `
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0a0a0a; color: #ffffff; padding: 40px 20px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
+                    <div style="border-bottom: 1px solid #262629; padding-bottom: 20px; margin-bottom: 24px;">
+                        <h2 style="margin: 0; font-size: 20px; font-weight: 600; color: #EDEEF0; letter-spacing: -0.5px;">OpenSetup Workspace</h2>
+                    </div>
+                    
+                    <h3 style="font-size: 16px; font-weight: 600; color: #EDEEF0; margin-top: 0; margin-bottom: 12px;">Setup Request Status Update</h3>
+                    
+                    <p style="color: #888a8e; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                        Hi there, your request for <strong style="color: #ffffff;">"${targetRequest.title}"</strong> has been updated.
+                    </p>
+
+                    <div style="background-color: #121215; border: 1px solid #212124; padding: 20px; border-radius: 12px; margin-bottom: 24px;">
+                        <p style="margin: 0 0 10px 0; font-size: 13px; color: #888a8e;"><strong>Request ID:</strong> <span style="font-family: monospace; color: #EDEEF0;">${targetRequest.requestId}</span></p>
+                        <p style="margin: 0 0 10px 0; font-size: 13px; color: #888a8e;"><strong>Status:</strong> <span style="color: ${statusColor}; font-weight: 600; text-transform: uppercase; font-size: 11px; background-color: ${statusBg}; padding: 2px 8px; border-radius: 6px;">${status}</span></p>
+                        <p style="margin: 0; font-size: 13px; color: #888a8e;"><strong>Message:</strong> ${statusReason}</p>
+                    </div>
+
+                    <p style="color: #525256; font-size: 12px; margin: 0; border-top: 1px solid #212124; pt-20px;">
+                        Thank you for contributing to OpenSetup!
+                    </p>
+                </div>
+                `
+            );
+
+            return res.status(200).json({
+                success: true,
+                message: `Request was ${status.toLowerCase()}, notification email sent, and record removed from database.`,
+                data: targetRequest
+            });
+        }
+
+        // Standard update flow for Pending or In progress statuses
         const updatedRequest = await RequestModel.findOneAndUpdate(
             { $or: [{ _id: id }, { requestId: id }] },
             { status, statusReason },
@@ -165,21 +228,28 @@ router.patch('/update/:id', requireAuth, async (req: Request, res: Response, nex
         await sendMail(
             `📋 Setup Request Updated: ${updatedRequest.title}`,
             `
-    <h2>Setup Request Status Update</h2>
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0a0a0a; color: #ffffff; padding: 40px 20px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
+                <div style="border-bottom: 1px solid #262629; padding-bottom: 20px; margin-bottom: 24px;">
+                    <h2 style="margin: 0; font-size: 20px; font-weight: 600; color: #EDEEF0; letter-spacing: -0.5px;">OpenSetup Workspace</h2>
+                </div>
+                
+                <h3 style="font-size: 16px; font-weight: 600; color: #EDEEF0; margin-top: 0; margin-bottom: 12px;">Setup Request Progress Update</h3>
+                
+                <p style="color: #888a8e; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                    Hi there, your request for <strong style="color: #ffffff;">"${updatedRequest.title}"</strong> has been updated.
+                </p>
 
-    <p>Hi,</p>
-    <p>Your request for <strong>"${updatedRequest.title}"</strong> (${updatedRequest.email}) has been updated.</p>
+                <div style="background-color: #121215; border: 1px solid #212124; padding: 20px; border-radius: 12px; margin-bottom: 24px;">
+                    <p style="margin: 0 0 10px 0; font-size: 13px; color: #888a8e;"><strong>Request ID:</strong> <span style="font-family: monospace; color: #EDEEF0;">${updatedRequest.requestId}</span></p>
+                    <p style="margin: 0 0 10px 0; font-size: 13px; color: #888a8e;"><strong>New Status:</strong> <span style="color: #7c3aed; font-weight: 600; text-transform: uppercase; font-size: 11px; background-color: rgba(124, 58, 237, 0.1); padding: 2px 8px; border-radius: 6px;">${status}</span></p>
+                    <p style="margin: 0; font-size: 13px; color: #888a8e;"><strong>Update Note:</strong> ${statusReason}</p>
+                </div>
 
-    <div style="background-color: #f4f4f5; padding: 16px; border-radius: 8px; margin: 16px 0;">
-        <p style="margin: 0 0 8px 0;"><strong>Request ID:</strong> ${updatedRequest.requestId}</p>
-        <p style="margin: 0 0 8px 0;"><strong>New Status:</strong> <span style="color: #10B981; font-weight: bold;">${status}</span></p>
-        <p style="margin: 0;"><strong>Update Note:</strong> ${statusReason}</p>
-    </div>
-
-    <hr/>
-
-    <p>Thank you for contributing to OpenSetup!</p>
-    `
+                <p style="color: #525256; font-size: 12px; margin: 0; border-top: 1px solid #212124; pt-20px;">
+                    Thank you for contributing to OpenSetup!
+                </p>
+            </div>
+            `
         );
 
         return res.status(200).json({

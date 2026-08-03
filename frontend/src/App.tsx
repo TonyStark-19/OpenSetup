@@ -87,7 +87,7 @@ export default function App(): React.JSX.Element {
         />
 
         <Route
-          path="/manage/contribution"
+          path="/manage/contributions"
           element={
             <ProtectedRoute>
               <ManageContributionsPage />
