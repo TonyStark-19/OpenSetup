@@ -1,4 +1,4 @@
-// reuqest item interface
+// request item interface
 export interface RequestItem {
     id: string;
     title: string;
@@ -45,8 +45,8 @@ export const getStatusStyles = (status: RequestItem["status"]) => {
 export default function RequestsHero() {
     return (
         <div
-            className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white py-16 sm:py-24 min-h-screen 
-            flex flex-col items-center justify-start transition-colors duration-300"
+            className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white py-20 sm:py-24 md:py-28 min-h-screen 
+            flex flex-col items-center justify-start transition-colors duration-300 px-4 sm:px-6 overflow-hidden"
         >
             {/* Dot Grid Layer */}
             <DotGrid />

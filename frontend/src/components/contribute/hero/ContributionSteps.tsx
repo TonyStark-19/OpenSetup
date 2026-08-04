@@ -8,12 +8,12 @@ import type { MainStepsProps } from "../../../sections/contribute/ContributeHero
 export default function ContributionSteps({ mainSteps }: { mainSteps: MainStepsProps[] }) {
     return (
         <div className="w-full flex flex-col items-center mb-12 px-4 max-w-6xl mx-auto">
-            <h4 className="text-[10px] font-mono font-bold tracking-widest text-zinc-400 dark:text-zinc-600 uppercase mb-12">
+            <h4 className="text-[10px] font-mono font-bold tracking-widest text-zinc-400 dark:text-zinc-600 uppercase mb-8 sm:mb-12">
                 How Contribution Works
             </h4>
 
             {/* Step Pipeline Tracking Layout */}
-            <div className="relative w-full grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-4 lg:gap-6">
+            <div className="relative w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 sm:gap-8 md:gap-4 lg:gap-6">
                 {/* Horizontal connection line layout for desktop viewports */}
                 <div
                     className="hidden md:block absolute top-10 left-[10%] right-[10%] h-0.5 border-t border-dashed border-zinc-200 
@@ -27,7 +27,7 @@ export default function ContributionSteps({ mainSteps }: { mainSteps: MainStepsP
                     >
                         {/* Circular Node Icon Wrapper */}
                         <div
-                            className={`w-20 h-20 rounded-full border-2 flex items-center justify-center mb-4 transition-all duration-300 
+                            className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 flex items-center justify-center mb-3 sm:mb-4 transition-all duration-300 
                             relative bg-white dark:bg-[#0a0a0a] group-hover/item:scale-110 shadow-sm
                             ${idx === 0 ? 'border-purple-500/40 dark:border-purple-500/30' : ''}
                             ${idx === 1 ? 'border-blue-500/40 dark:border-blue-500/30' : ''}
@@ -39,7 +39,7 @@ export default function ContributionSteps({ mainSteps }: { mainSteps: MainStepsP
                             {/* Inner ambient subtle background color core matching data logic */}
                             <div className={`absolute inset-1 rounded-full opacity-10 transition-opacity group-hover/item:opacity-20 ${step.bg.split(' ')[0]}`} />
 
-                            <div className="relative z-10 scale-150">
+                            <div className="relative z-10 scale-125 sm:scale-150">
                                 {step.icon}
                             </div>
 
@@ -54,19 +54,19 @@ export default function ContributionSteps({ mainSteps }: { mainSteps: MainStepsP
 
                         {/* Text Metadata Parameters Header blocks */}
                         <h3
-                            className="text-xs md:text-sm font-bold text-zinc-900 dark:text-zinc-200 group-hover/item:text-black 
+                            className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-200 group-hover/item:text-black 
                             dark:group-hover/item:text-white transition-colors"
                         >
                             {step.title}
                         </h3>
 
-                        <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-1 max-w-37.5 leading-relaxed transition-colors">
+                        <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-1 max-w-55 sm:max-w-37.5 leading-relaxed transition-colors">
                             {step.desc}
                         </p>
 
-                        {/* Mobile view directional indicators */}
-                        {idx < 4 && (
-                            <div className="flex md:hidden items-center justify-center mt-4 text-zinc-300 dark:text-zinc-800 animate-pulse">
+                        {/* Mobile & Tablet directional indicators */}
+                        {idx < mainSteps.length - 1 && (
+                            <div className="flex md:hidden items-center justify-center mt-3 text-zinc-300 dark:text-zinc-800 animate-pulse">
                                 <ArrowRight size={14} className="rotate-90" />
                             </div>
                         )}
