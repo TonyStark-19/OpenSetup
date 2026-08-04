@@ -4,7 +4,7 @@ export default function RequestHeroHeader() {
         <div className="w-full max-w-3xl flex flex-col items-center text-center select-none mb-8 sm:mb-10 px-2 sm:px-4">
             <div
                 className="flex items-center gap-2 border border-zinc-200 dark:border-[#252628] bg-zinc-50 dark:bg-[#0c0c0e] 
-                px-3 py-1 rounded-full mb-5 sm:mb-6 shadow-sm dark:shadow-none max-sm:mt-5"
+                px-3 py-1 rounded-full mb-5 sm:mb-6 shadow-sm dark:shadow-none"
             >
                 <span className="w-1.5 h-1.5 bg-red-500 dark:bg-[#ef4444] rounded-full animate-pulse shrink-0" />
 
