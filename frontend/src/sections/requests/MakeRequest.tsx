@@ -123,7 +123,7 @@ export default function MakeRequest() {
 
     return (
         <div
-            className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white pb-16 pt-6 flex flex-col items-center 
+            className="w-full bg-white dark:bg-[#0a0a0a] text-zinc-900 dark:text-white pb-16 sm:pt-6 flex flex-col items-center 
             justify-start transition-colors duration-300"
         >
             {/* Split Grid for Content Forms & Requests Panel */}

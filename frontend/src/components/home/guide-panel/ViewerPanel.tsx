@@ -26,7 +26,7 @@ export default function ViewerPanel({ viewMode, handleCopy, copiedText, markdown
                         components={{
                             h1: ({ children }) =>
                                 <h1
-                                    className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-4 border-b 
+                                    className="text-2xl max-sm:pr-4 sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-4 border-b 
                                     border-zinc-200 dark:border-[#212124] pb-2 transition-colors"
                                 >
                                     {children}

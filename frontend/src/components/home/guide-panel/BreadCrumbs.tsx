@@ -29,7 +29,7 @@ export default function BreadCrumbs({ MOCK_METADATA, upvoteCount }: BreadCrumbsP
             {/* Telemetry Stats & Status Bar */}
             <div
                 className="flex items-center gap-3 sm:gap-4 text-zinc-500 dark:text-[#888a8e] font-medium tracking-wide w-full 
-                sm:w-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-zinc-200/60 dark:border-zinc-800/60"
+                sm:w-auto justify-start sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-zinc-200/60 dark:border-zinc-800/60"
             >
                 <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-[#4ade80] animate-pulse" />

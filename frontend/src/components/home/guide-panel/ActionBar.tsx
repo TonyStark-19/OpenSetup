@@ -40,7 +40,7 @@ export default function ActionBar({ MOCK_METADATA, handleUpvote, upvoted, upvote
                     )}
                 </div>
 
-                <span className="truncate max-w-45 sm:max-w-xs">
+                <span className="max-w-full sm:max-w-xs">
                     Contributed by <span className="text-zinc-900 dark:text-white font-medium hover:underline cursor-pointer">@{MOCK_METADATA.contributor}</span>
                 </span>
 
