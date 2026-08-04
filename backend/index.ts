@@ -22,13 +22,28 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable Cross-Origin Resource Sharing (CORS)
+// allowed origins for CORS
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://open-setup.vercel.app",
+];
+
+// CORS configuration
 app.use(
     cors({
-        origin: process.env.CLIENT_URL || 'http://localhost:5173',
-        credentials: true, // Required for passport cookie sessions
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-        allowedHeaders: ['Content-Type', 'Authorization']
+        origin: (origin, callback) => {
+            // Allow requests with no origin
+            if (!origin) return callback(null, true);
+
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+
+            return callback(new Error("Not allowed by CORS"));
+        },
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
 
