@@ -33,7 +33,7 @@ export default function ScrollingRequests({ TICKER_ROW_1, TICKER_ROW_2, getStatu
                         <div
                             key={`r1-${idx}`}
                             className="flex flex-col justify-between bg-white dark:bg-[#0e0e10] border border-zinc-200 dark:border-zinc-900
-                            rounded-xl p-3.5 sm:p-4 w-60 sm:min-w-65 shadow-sm dark:shadow-none"
+                            rounded-xl p-4 w-60 sm:min-w-65 shadow-sm dark:shadow-none"
                         >
                             <h3 className="text-xs sm:text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-200 truncate">{req.title}</h3>
 
@@ -68,7 +68,7 @@ export default function ScrollingRequests({ TICKER_ROW_1, TICKER_ROW_2, getStatu
                         <div
                             key={`r2-${idx}`}
                             className="flex flex-col justify-between bg-white dark:bg-[#0e0e10] border border-zinc-200 dark:border-zinc-900 
-                            rounded-xl p-3.5 sm:p-4 w-60 sm:min-w-65 shadow-sm dark:shadow-none"
+                            rounded-xl p-4 w-60 sm:min-w-65 shadow-sm dark:shadow-none"
                         >
                             <h3 className="text-xs sm:text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-200 truncate">{req.title}</h3>
 

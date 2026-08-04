@@ -16,15 +16,15 @@ export default function EditorModal({ editorViewMode, setEditorViewMode, editorV
     return (
         <div
             className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#070708] rounded-xl 
-            overflow-hidden flex flex-col min-h-80 shadow-inner"
+            overflow-hidden flex flex-col min-h-80 shadow-inner max-w-full"
         >
             <div
-                className="bg-zinc-50 dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 px-4 py-2 
-                flex items-center justify-between text-xs select-none"
+                className="bg-zinc-50 dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 px-3 sm:px-4 py-2 
+                flex items-center justify-between text-xs select-none gap-2 flex-wrap"
             >
-                <span className="font-mono text-zinc-400 dark:text-zinc-600">embedded_workspace.md</span>
+                <span className="font-mono text-zinc-400 dark:text-zinc-600 truncate max-w-37.5 sm:max-w-xs">embedded_workspace.md</span>
 
-                <div className="flex border border-zinc-200 dark:border-zinc-800 rounded-md p-0.5 bg-white dark:bg-zinc-900">
+                <div className="flex border border-zinc-200 dark:border-zinc-800 rounded-md p-0.5 bg-white dark:bg-zinc-900 shrink-0">
                     <button
                         type="button"
                         onClick={() => setEditorViewMode("edit")}
@@ -52,33 +52,33 @@ export default function EditorModal({ editorViewMode, setEditorViewMode, editorV
             </div>
 
             {/* Toggle Workspace Layout Elements */}
-            <div className="w-full min-h-65 flex flex-col relative grow">
+            <div className="w-full min-h-65 flex flex-col relative grow overflow-hidden">
                 {editorViewMode === "edit" ? (
                     <textarea
                         value={editorValue}
                         onChange={(e) => setEditorValue(e.target.value)}
                         placeholder={`# Quickstart: ${title || 'Your Stack'}\n\n${desc || 'Provide an overview definition here...'}\n\n### 1. Installation\n\`\`\`bash\nnpm install your-package\n\`\`\``}
-                        className="w-full grow p-4 font-mono text-[13px] bg-transparent text-zinc-800 dark:text-[#b5b7ba] 
+                        className="w-full grow p-3.5 sm:p-4 font-mono text-xs sm:text-[13px] bg-transparent text-zinc-800 dark:text-[#b5b7ba] 
                         placeholder-zinc-400/60 dark:placeholder-zinc-700 focus:outline-none resize-none leading-relaxed min-h-65 animate-fade-in"
                     />
                 ) : (
                     <div
-                        className="p-5 grow overflow-y-auto text-left max-h-100 prose dark:prose-invert max-w-none bg-zinc-50/20 
+                        className="p-4 sm:p-5 grow overflow-y-auto text-left max-h-100 prose dark:prose-invert max-w-none bg-zinc-50/20 
                         dark:bg-black/10 min-h-65 animate-fade-in text-zinc-800 dark:text-zinc-200"
                     >
                         {editorValue.trim() ? (
-                            <div className="markdown-preview text-sm leading-relaxed space-y-4">
+                            <div className="markdown-preview text-xs sm:text-sm leading-relaxed space-y-4 overflow-x-auto">
                                 <ReactMarkdown
                                     components={{
                                         h1: ({ node, ...props }) =>
                                             <h1
-                                                className="text-2xl font-extrabold tracking-tight border-b border-zinc-200 
+                                                className="text-xl sm:text-2xl font-extrabold tracking-tight border-b border-zinc-200 
                                                 dark:border-zinc-800 pb-2 mt-6 mb-4 text-zinc-900 dark:text-white" {...props}
                                             />,
                                         h2: ({ node, ...props }) =>
-                                            <h2 className="text-xl font-bold mt-6 mb-3 text-zinc-900 dark:text-zinc-100" {...props} />,
+                                            <h2 className="text-lg sm:text-xl font-bold mt-6 mb-3 text-zinc-900 dark:text-zinc-100" {...props} />,
                                         h3: ({ node, ...props }) =>
-                                            <h3 className="text-lg font-bold mt-4 mb-2 text-zinc-800 dark:text-zinc-200" {...props} />,
+                                            <h3 className="text-base sm:text-lg font-bold mt-4 mb-2 text-zinc-800 dark:text-zinc-200" {...props} />,
                                         p: ({ node, ...props }) =>
                                             <p className="mb-4 text-zinc-600 dark:text-zinc-400 leading-relaxed" {...props} />,
                                         ul: ({ node, ...props }) =>
@@ -96,7 +96,7 @@ export default function EditorModal({ editorViewMode, setEditorViewMode, editorV
                                                 />
                                             ) : (
                                                 <pre
-                                                    className="bg-zinc-100 dark:bg-zinc-950 p-4 border border-zinc-200 
+                                                    className="bg-zinc-100 dark:bg-zinc-950 p-3 sm:p-4 border border-zinc-200 
                                                     dark:border-zinc-900 rounded-xl leading-relaxed overflow-x-auto my-3"
                                                 >
                                                     <code
@@ -112,7 +112,7 @@ export default function EditorModal({ editorViewMode, setEditorViewMode, editorV
                                 </ReactMarkdown>
                             </div>
                         ) : (
-                            <div className="text-center text-zinc-400 dark:text-zinc-600 italic py-6 text-xs select-none">
+                            <div className="text-center text-zinc-400 dark:text-zinc-600 italic py-6 text-xs select-none px-2">
                                 Workspace is empty. Start drafting markdown code inside the editor tab to review live parameters.
                             </div>
                         )}

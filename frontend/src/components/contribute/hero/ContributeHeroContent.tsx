@@ -4,7 +4,7 @@ export default function ContributeHeroContent() {
         <>
             <div
                 className="flex items-center gap-2 border border-zinc-200 dark:border-[#252628] bg-zinc-50 
-                dark:bg-[#0c0c0e] px-3 py-1 rounded-full mb-5 sm:mb-6 shadow-sm dark:shadow-none mt-8 sm:mt-12 shrink-0"
+                dark:bg-[#0c0c0e] px-3 py-1 rounded-full mb-5 sm:mb-6 shadow-sm dark:shadow-none mt-12 shrink-0"
             >
                 <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse shrink-0" />
                 <span className="text-zinc-500 dark:text-zinc-400 text-[10px] uppercase font-mono font-bold tracking-wider truncate">
