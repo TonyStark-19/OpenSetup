@@ -26,11 +26,15 @@ import ScrollToTop from "./components/utils/Scroltotop";
 export default function App(): React.JSX.Element {
   return (
     <>
+      {/* Scroll to top component */}
       <ScrollToTop scrollRef={null} />
 
       <Routes>
         {/* Publically accessible landing page */}
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={<HomePage />}
+        />
 
         {/* Auth page: Restricted to non-logged-in users only */}
         <Route
