@@ -39,7 +39,7 @@ export default function Hero() {
             <Content />
 
             {/* setup guide panel wrapper targeting internal layouts */}
-            <div className="w-full max-w-7xl relative z-20 px-2 sm:mt-4">
+            <div className="w-full max-w-8xl relative z-20 px-2">
                 <GuidePanel />
             </div>
         </div>

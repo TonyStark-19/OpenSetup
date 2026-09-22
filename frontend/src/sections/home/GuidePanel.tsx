@@ -75,7 +75,7 @@ export default function GuidePanel() {
 
     return (
         <div
-            className="w-full max-w-4xl mx-auto bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-[#212124] overflow-hidden 
+            className="w-full max-w-5xl mx-auto bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-[#212124] overflow-hidden 
             shadow-2xl text-zinc-900 dark:text-[#EDEEF0] font-sans my-12 rounded-xl transition-colors duration-300"
         >
             {/* Browser Window Header */}
